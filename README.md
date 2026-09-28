@@ -1,154 +1,211 @@
-﻿# ⚖️ অধিকার · Odhikar with Legal Hub
-### *প্রান্তিক জনগোষ্ঠীর জন্য এআই-চালিত আইনি সহায়তা, ফ্যাক্ট-এক্সট্র্যাকশন ও কেস ম্যানেজমেন্ট প্ল্যাটফর্ম*
-### *AI-Assisted Legal Aid, Fact-Finding, and Case Workflow Platform for Bangladesh*
+﻿# ⚖️ Odhikar (অধিকার) · AI-Powered Legal Aid & Case Management Platform
+### *Empowering Marginalized Communities through Voice-First Legal Intake, Automated Fact Extraction, and Statutory Workflow Automation*
 
 [![Live Demo](https://img.shields.io/badge/Live_App-Vercel-success?style=for-the-badge&logo=vercel)](https://odhikar-legal-hub.vercel.app)
 [![Backend API](https://img.shields.io/badge/Backend_API-Render-blue?style=for-the-badge&logo=render)](https://odhikar-backend.onrender.com/api)
 [![Swagger Docs](https://img.shields.io/badge/Swagger-OpenAPI-brightgreen?style=for-the-badge&logo=swagger)](https://odhikar-backend.onrender.com/swagger/index.html)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/prityd825/Odhikar-with-legal-hub)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 📌 প্রকল্পের সারসংক্ষেপ ও প্রেক্ষাপট (Project Context & Overview)
+## 🌟 Executive Summary & Scholarship Context
 
-**অধিকার (Odhikar)** হলো বাংলাদেশের বিচারপ্রার্থী সাধারণ মানুষ এবং লিগ্যাল এইড সংস্থাগুলোর (যেমন: **জাতীয় আইনগত সহায়তা প্রদান সংস্থা - NLASO** ও **বাংলাদেশ বার কাউন্সিল**) মধ্যে দূরত্ব ঘোচানোর জন্য তৈরি একটি আধুনিক **এআই-চালিত আইনি প্রযুক্তি প্ল্যাটফর্ম (Legal-Tech Platform)**।
+**Odhikar** (*Bengali for "Rights"*) is an end-to-end legal-technology platform designed to democratize access to justice in the Global South, directly contributing to the **United Nations Sustainable Development Goals (UN SDGs)**:
+* **SDG 16 (Peace, Justice, and Strong Institutions):** Providing equal, timely access to legal aid for disadvantaged populations.
+* **SDG 5 (Gender Equality):** Protecting women from domestic abuse, dowry harassment, and denial of dower/maintenance rights.
+* **SDG 10 (Reduced Inequalities):** Eradicating linguistic, literacy, and financial barriers in formal legal processes.
 
-বাংলাদেশে প্রতি বছর লাখ লাখ মানুষ পারিবারিক কলহ, যৌতুক নির্যাতন, দেনমোহর ও ভরণপোষণ না পাওয়া, বকেয়া মজুরি কিংবা জমিজমা বিরোধের শিকার হন। কিন্তু আইনি প্রক্রিয়ার জটিলতা, সাক্ষরতার অভাব, আদালতের কঠিন পরিভাষা এবং আইনজীবীর উচ্চ ফি-এর কারণে প্রান্তিক জনগোষ্ঠীর একটি বড় অংশ আনুষ্ঠানিক বিচার ব্যবস্থার বাইরে থেকে যায়।
-
-**‘অধিকার’ প্ল্যাটফর্মটি সাধারণ নাগরিকের মুখের সাধারণ ভাষাকে স্বয়ংক্রিয়ভাবে আদালতের গ্রহণযোগ্য আইনি নথিতে রূপান্তর করে এবং প্যারালিগ্যাল ও আইনজীবীদের জন্য একটি পূর্ণাঙ্গ অডিট ড্যাশবোর্ড সরবরাহ করে।**
-
----
-
-## 🎯 কেন মানুষ এটি ব্যবহার করবে? (Why People Will Use It?)
-
-### ১. মুখে কথা বলে আইনি অভিযোগ নথিভুক্তকরণ (Voice-First Legal Intake)
-* সাধারণ নাগরিক বা কম লেখাপড়া জানা মানুষ কোনো টাইপ করা ছাড়াই নিজের আঞ্চলিক ভাষায় বা কথ্য বাংলায় তাদের সমস্যার বিবরণ মুখে বলতে পারেন।
-* এআই স্বয়ংক্রিয়ভাবে অডিও শুনে ট্রান্সক্রিপ্ট তৈরি করে এবং ঘটনাটি কোন আইনি বিষয়ের আওতায় পড়ে তা শনাক্ত করে।
-
-### ২. স্বয়ংক্রিয় আইনি তথ্য নিষ্কাশন (Automated Fact Extraction)
-* নাগরিকের অগোছালো বর্ণনা থেকে এআই স্বয়ংক্রিয়ভাবে মামলার প্রয়োজনীয় আইনি উপাদানগুলো আলাদা করে ফেলে (যেমন: বাদী ও বিবাদীর নাম, বিবাহের তারিখ, দেনমোহরের অঙ্ক, পরিশোধিত/বকেয়া পরিমাণ, শারীরিক নির্যাতনের বিবরণ, ঘটনার স্থান ও দাবিকৃত প্রতিকার)।
-
-### ৩. জুডিশিয়াল প্রস্তুতি ও অডিট চেকলিস্ট (Legal Readiness & Audit)
-* আদালত ও লিগ্যাল এইড ফাইলিং স্ট্যান্ডার্ড অনুযায়ী মামলার আঞ্চলিক এখতিয়ার (Jurisdiction), তামাদি মেয়াদ (Limitation Period), প্রয়োজনীয় সাক্ষ্য-প্রমাণ ও আইনি ধারার শর্ত পূরণ হয়েছে কি না তা স্বয়ংক্রিয়ভাবে অডিট করে স্কোর প্রদর্শন করে।
-
-### ৪. এক ক্লিকে অফিসিয়াল আবেদনপত্র প্রস্তুত (1-Click Court Petition Draft)
-* সংগৃহীত তথ্যের ভিত্তিতে আদালতের জন্য নির্ধারিত ফর্ম্যাট অনুযায়ী স্বয়ংক্রিয়ভাবে বাংলা আইনি দরখাস্ত বা লিগ্যাল নোটিশ তৈরি হয়। আইনজীবী যাচাই শেষে তাৎক্ষণিকভাবে প্রিন্ট বা অফিসিয়াল ওয়াটারমার্কযুক্ত PDF ডাউনলোড করতে পারেন।
-
-### ৫. জরুরি নিরাপত্তা ও রেড-ফ্ল্যাগ অ্যালার্ট (Safety & Escalation Protocol)
-* গৃহস্থালি সহিংসতা, খুন বা অ্যাসিড নিক্ষেপের মতো তাৎক্ষণিক জীবনের হুমকি থাকলে সিস্টেম স্বয়ংক্রিয়ভাবে কেসটিকে **‘জরুরি (Urgent)’** হিসেবে চিহ্নিত করে সংশ্লিষ্ট জরুরি হেল্পলাইন (১০৯, ৯৯৯) ও প্যারালিগ্যাল টিমের কাছে অগ্রাধিকার ভিত্তিতে পাঠায়।
+In developing nations like Bangladesh, millions of citizens—particularly rural women, informal workers, and low-income families—are functionally excluded from the justice system due to illiteracy, complex legal jargon, and the exorbitant cost of legal counsel. **Odhikar leverages conversational Large Language Models (LLMs) and Speech-to-Text (STT) technology to convert spoken, unstructured vernacular narratives into legally verified, court-ready petitions while providing legal professionals with an executive audit registry.**
 
 ---
 
-## 👥 কারা এটি ব্যবহার করবে? (Who Will Use It?)
+## 🚨 The Challenge: The Access-to-Justice Gap
 
-| ব্যবহারকারী গ্রুপ (Target Audience) | প্ল্যাটফর্মের ব্যবহার ও সুবিধা (Role & Value) |
-| :--- | :--- |
-| **১. প্রান্তিক নাগরিক ও বিচারপ্রার্থী (Citizens / Litigants)** | • দেনমোহর ও ভরণপোষণ বঞ্চিত নারী<br>• যৌতুক ও পারিবারিক নির্যাতনের শিকার নাগরিক<br>• বকেয়া মজুরি বঞ্চিত তৈরি পোশাক ও অপ্রাতিষ্ঠানিক শ্রমিক<br>• ভূমি বা পৈতৃক সম্পত্তি থেকে বেদখল হওয়া ব্যক্তি<br>👉 *সুবিধা: নিজের ভাষায় সরাসরি অভিযোগ জানিয়ে বিনামূল্যে প্রাথমিক আইনি রূপরেখা পান।* |
-| **২. মাঠপর্যায়ের প্যারালেগাল ও সমাজকর্মী (Paralegals / Field Workers)** | • ইউনিয়ন বা কমিউনিটি পর্যায়ে নাগরিকদের বক্তব্য গ্রহণ<br>• প্রাথমিক তথ্য যাচাই ও অডিও রেকর্ড পর্যালোচনা<br>• নিকটস্থ লিগ্যাল এইড ক্লিনিকে অ্যাপয়েন্টমেন্ট সময়সূচী (Slot Booking) বরাদ্দ। |
-| **৩. প্যানেল আইনজীবী ও লিগ্যাল এইড অফিসার (Panel Lawyers / Advocates)** | • প্যারালেগাল ডেস্কে মামলার রেজিস্ট্রি টেবিল পরিদর্শন<br>• আইনি প্রস্তুতি স্কোর (Legal Readiness Score) পর্যালোচনা<br>• খসড়া ড্রাফট সম্পাদনা, চূড়ান্ত অনুমোদন ও অফিশিয়াল PDF ডাউনলোড। |
-| **৪. জাতীয় আইনি সহায়তা সংস্থা (NLASO / NGOs)** | • ডিজিটাল কেস ট্র্যাকিং ও কেন্দ্রীয় রিপোর্ট ব্যবস্থাপনা<br>• মামলা নিষ্পত্তির গতি বৃদ্ধি ও নথি সংরক্ষণে স্বচ্ছতা আনয়ন। |
+1. **Linguistic & Literacy Barriers:** More than 70% of low-income legal seekers cannot draft written complaints or comprehend legal procedural terminologies.
+2. **Fact-Finding Bottlenecks:** Frontline paralegals and legal aid workers manually interview clients, often omitting critical statutory elements (e.g., limitation periods, exact claim amounts, jurisdictional boundaries, evidence documentation).
+3. **Caseload Fatigue:** Public defenders and legal aid officers under the **National Legal Aid Services Organization (NLASO)** face overwhelming backlogs, delaying urgent petitions for months.
+4. **Safety Blindspots:** Domestic violence and severe threat victims lack automated red-flag detection to trigger immediate escalation and legal protection.
 
 ---
 
-## ⚖️ অন্তর্ভুক্ত প্রধান আইনি বিষয়সমূহ (Covered Legal Domains)
+## 💡 The Solution: How Odhikar Works
 
-প্ল্যাটফর্মটি বাংলাদেশ সরকারের প্রচলিত মূল আইনগুলোর ওপর ভিত্তি করে পরিচালিত:
+Odhikar introduces a **human-in-the-loop, AI-assisted legal pipeline**:
 
-1. **দেনমোহর ও ভরণপোষণ (Dower & Maintenance):**
-   * *মুসলিম পারিবারিক আইন অধ্যাদেশ, ১৯৬১* এবং *পারিবারিক আদালত আইন, ২০২৩*
-2. **যৌতুক ও পারিবারিক সহিংসতা (Dowry & Domestic Violence):**
-   * *যৌতুক নিরোধ আইন, ২০১৮* এবং *পারিবারিক সহিংসতা (প্রতিরোধ ও সুরক্ষা) আইন, ২০১০*
-3. **বকেয়া মজুরি ও শ্রম বিরোধ (Labour & Unpaid Wages):**
-   * *বাংলাদেশ শ্রম আইন, ২০০৬*
-4. **জমি ও সম্পত্তি সংক্রান্ত বিরোধ (Land & Property Dispute):**
-   * নারীর পৈতৃক ও বৈবাহিক স্বত্ব, বেদখল ও হস্তান্তর সংক্রান্ত বিরোধ
-5. **নারী ও শিশু সুরক্ষা (Women & Child Protection):**
-   * সন্তানের হেফাজত (Custody) ও *নারী ও শিশু নির্যাতন দমন আইন, ২০০০ (সংশোধিত ২০২০)*
+```
+[ Citizen Voice/Text Intake ] 
+             ↓
+[ Speech-to-Text & Dialect Transcription ] 
+             ↓
+[ LLM Legal Fact Extraction & Classification ] 
+             ↓
+[ Statutory Readiness & Audit Checklist Engine ] 
+             ↓
+[ Executive Table Registry for Paralegals/Lawyers ] 
+             ↓
+[ 1-Click Court Petition & Formal PDF Generation ]
+```
+
+### 1. 🎙️ Voice-First Vernacular Intake
+Litigants speak freely in colloquial Bengali without typing. The system transcribes audio, identifies emotional distress markers, and conducts an empathetic dialogue to gather missing facts.
+
+### 2. 🧠 Automated Legal Fact Extraction
+Extracts structured legal entities:
+* **Parties:** Applicant (বাদী) and Respondent (বিবাদী) details.
+* **Financial Facts:** Dower amount (*দেনমোহর*), paid vs. unpaid claims, maintenance arrears (*ভরণপোষণ*), unpaid wages (*বকেয়া মজুরি*).
+* **Incident Details:** Marriage date, abuse history, eviction threats, physical harm records.
+* **Confidence Scoring:** Tags fields as *High-Confidence (Stated)*, *Inferred*, or *Missing*.
+
+### 3. ⚖️ Judicial Audit & Readiness Scoring
+Automatically benchmarks the claim against Bangladeshi statutory criteria, assigning a **Legal Readiness Score (০-১০০%)**:
+* Territorial jurisdiction verification (আঞ্চলিক এখতিয়ার).
+* Statute of limitations compliance (তামাদি মেয়াদ).
+* Evidentiary documentation checklist (কাবিননামা, জিডি কপি, নোটিশ).
+
+### 4. 📄 1-Click Formal Court Petition Drafting
+Bridges the gap between raw complaints and formal judicial documents. Generates standard court applications formatted for the Family Court or Labour Court, complete with official letterhead, formal prayer for relief, and downloadable official PDF.
+
+### 5. 🚨 Intelligent Safety Breakout Protocol
+Scans testimonies for emergency threat keywords (e.g., severe physical assault, death threats, child abduction). Automatically classifies the case as **Urgent (🚨)** and routes it to emergency helplines (109 / 999) and expedited legal counseling.
 
 ---
 
-## 🔗 লাইভ প্ল্যাটফর্ম লিংকসমূহ (Live Links & Access)
+## 👥 Target Users & Stakeholder Ecosystem
 
-| মডিউল | সরাসরি লিংক | বিবরণ |
+| Stakeholder Persona | Problem Addressed | Platform Value |
 | :--- | :--- | :--- |
-| 🏠 **মূল ওয়েবসাইট (Landing Page)** | [odhikar-legal-hub.vercel.app](https://odhikar-legal-hub.vercel.app) | সাধারণ নাগরিকদের জন্য প্ল্যাটফর্ম পরিচিতি ও নেভিগেশন |
-| ⚖️ **নাগরিক এআই ইনটেক (AI Intake)** | [odhikar-legal-hub.vercel.app/intake](https://odhikar-legal-hub.vercel.app/intake) | নাগরিকের সাথে ভয়েস ও চ্যাটের মাধ্যমে ইন্টারেক্টিভ প্রশ্নোত্তর |
-| 🧑‍⚖️ **প্যারালেগাল কেস ডেস্ক (Registry)** | [odhikar-legal-hub.vercel.app/paralegal](https://odhikar-legal-hub.vercel.app/paralegal) | মামলা রেজিস্ট্রি টেবিল, লাইভ সার্চ, অডিট ও ড্রাফটিং ওয়ার্কস্পেস |
-| 🔐 **প্যারালেগাল ডেমো লগইন** | [odhikar-legal-hub.vercel.app/paralegal/login](https://odhikar-legal-hub.vercel.app/paralegal/login) | অনুমোদিত আইনজীবী বা প্যারালিগ্যাল প্রোফাইল দিয়ে এক-ক্লিকে লগইন |
-| ⚙️ **ব্যাকএন্ড এপিআই (Render)** | [odhikar-backend.onrender.com/api](https://odhikar-backend.onrender.com/api) | হাই-পারফরম্যান্স .NET 8 কোর ওয়েব এপিআই |
-| 📑 **ইন্টারেক্টিভ সোয়াগার ডকস** | [odhikar-backend.onrender.com/swagger](https://odhikar-backend.onrender.com/swagger/index.html) | ব্যাকএন্ড এপিআই এন্ডপয়েন্ট ও স্কিমা স্পেসিফিকেশন |
+| **Vulnerable Litigants & Marginalized Citizens** | Cannot afford lawyers or draft petitions; fear formal court settings. | Free, speech-enabled legal triage in their native language with empathetic guidance. |
+| **Field Paralegals & Social Workers** | Overburdened by manual note-taking and fragmented documentation. | Fast client onboarding, standardized data collection, and instant clinic appointment booking. |
+| **Panel Advocates & Legal Aid Officers** | Waste hours verifying basic facts; manually re-type court petitions. | Executive case registry table, automated audit checklist, and 1-click court application generator. |
+| **Legal Aid Organizations (NLASO, BRAC, NGOs)** | Lack centralized digital tracking and operational visibility into pending cases. | Data-driven case queue, triage analytics, and auditable case records. |
 
 ---
 
-## 🏗️ সিস্টেম আর্কিটেকচার (System Architecture)
+## 📜 Supported Statutory Legal Frameworks
+
+The platform currently models statutory procedures under primary legislation in Bangladesh:
+
+1. **Family Law & Maintenance:**
+   * *Muslim Family Laws Ordinance, 1961 (MFLO)*
+   * *Family Courts Act, 2023 (পারিবারিক আদালত আইন, ২০২৩)*
+2. **Anti-Dowry & Domestic Violence:**
+   * *Dowry Prohibition Act, 2018 (যৌতুক নিরোধ আইন, ২০১৮)*
+   * *Domestic Violence (Prevention and Protection) Act, 2010*
+3. **Labour Rights & Wages:**
+   * *Bangladesh Labour Act, 2006 (Section 33 & Chapter X: Wages and Payment)*
+4. **Land Rights & Eviction:**
+   * Women''s inheritance rights, marital property claims, and unlawful dispossession.
+5. **Women and Child Protection:**
+   * Child custody determinations and *Prevention of Women and Children Repression Act, 2000 (Amended 2020)*.
+
+---
+
+## 🌐 Live Deployments & Demonstrations
+
+| Component | Production URL | Description |
+| :--- | :--- | :--- |
+| 🏠 **Client Web Portal** | [https://odhikar-legal-hub.vercel.app](https://odhikar-legal-hub.vercel.app) | Responsive public landing & feature overview |
+| ⚖️ **Citizen AI Legal Intake** | [https://odhikar-legal-hub.vercel.app/intake](https://odhikar-legal-hub.vercel.app/intake) | Multimodal speech-and-text interactive legal consultation |
+| 🧑‍⚖️ **Paralegal Registry Desk** | [https://odhikar-legal-hub.vercel.app/paralegal](https://odhikar-legal-hub.vercel.app/paralegal) | Executive case registry table with live search & filters |
+| 🔐 **Advocate Demo Login** | [https://odhikar-legal-hub.vercel.app/paralegal/login](https://odhikar-legal-hub.vercel.app/paralegal/login) | Verified Bar Council panel advocate profile portal |
+| ⚙️ **Backend Web API** | [https://odhikar-backend.onrender.com/api](https://odhikar-backend.onrender.com/api) | Production .NET 8 RESTful services |
+| 📑 **OpenAPI / Swagger** | [https://odhikar-backend.onrender.com/swagger/index.html](https://odhikar-backend.onrender.com/swagger/index.html) | Interactive API documentation & schemas |
+
+---
+
+## 🏗️ Architecture & Data Pipeline
 
 ```mermaid
-graph TD
-    A[নাগরিক / আইনি সহায়তা প্রার্থী] -->|ভয়েস বা টেক্সট বার্তা| B(Angular 19 Frontend)
-    B -->|অডিও স্ট্রিমিং ও স্পিচ| C(Groq Whisper / Web Speech API)
-    B -->|REST API Requests| D(.NET 8 Web API on Render)
-    D -->|ফ্যাক্ট এক্সট্র্যাকশন প্রম্পট| E(Gemini 2.5 / OpenRouter LLM)
-    D -->|ডাটাবেজ অপারেশনস| F[(MongoDB Database)]
-    D -->|অফিসিয়াল PDF রেন্ডারিং| G(QuestPDF / কালপুরুষ বাংলা ফন্ট)
-    D -->|কেস রেজিস্ট্রি ও ওয়ার্কফ্লো| H[প্যারালেগাল ও আইনজীবী ডেস্ক]
-    H -->|আইনি অডিট ও অনুমোদন| I[আদালতের আনুষ্ঠানিক দরখাস্ত PDF]
+graph LR
+    subgraph Client Layer
+        A[Citizen Mobile/Web] -->|Voice/Text| B(Angular 19 SPA)
+        L[Advocate/Paralegal] -->|Registry & Audit| B
+    end
+
+    subgraph API & Intelligence Layer
+        B -->|Audio Stream| C(Groq Whisper STT)
+        B -->|REST API Requests| D(.NET 8 Core Web API)
+        D -->|Legal Extraction Prompts| E(Google Gemini 2.5 / OpenRouter)
+        D -->|Document Rendering| F(QuestPDF / Kalpurush Font Engine)
+    end
+
+    subgraph Persistence Layer
+        D -->|Read / Write| G[(MongoDB Database)]
+        G --> H[(Case Summaries)]
+        G --> I[(Question Bank)]
+        G --> J[(Application Templates)]
+    end
+
+    subgraph Output Deliverables
+        D -->|Official PDF Notice| K[Formal Court Petition & Letterhead]
+    end
 ```
 
 ---
 
-## 🛠️ প্রযুক্তিগত বিবরণ (Tech Stack)
+## 🛠️ Technology Stack & Engineering Design
 
-### ক্লায়েন্ট / ফ্রন্টএন্ড (Frontend):
-* **Framework:** Angular 19 (Standalone Components, Signals)
-* **Styling:** Vanilla CSS, Tailwind CSS, Glassmorphism & Executive Theme
-* **Typography:** Hind Siliguri, Inter, Kalpurush
-* **Speech Integration:** Web Speech API, Text-to-Speech Engine
-* **PDF Export:** jsPDF, html2canvas, Client-side Document Previewer
-* **Hosting:** Vercel
+### Frontend Application
+* **Framework:** Angular 19 (Standalone Components, Signals, Reactive Extensions)
+* **Styling & Design System:** Vanilla CSS & Tailwind CSS, custom Glassmorphism components, executive dashboard theme
+* **Typography:** Hind Siliguri, Inter, Kalpurush (Bengali Unicode support)
+* **Speech Integration:** Web Speech API, Custom Text-to-Speech Engine
+* **PDF Compilation:** jsPDF, html2canvas, dynamic client-side DOM rendering
+* **Deployment:** Vercel (Edge Network)
 
-### সার্ভার / ব্যাকএন্ড (Backend):
-* **Framework:** .NET 8.0 (C# Web API)
-* **Architecture:** Clean Architecture (Api, Application, Domain, Infrastructure)
-* **Database:** MongoDB (Documents, Case Summaries, Dynamic Application Templates)
-* **AI Engines:** Google Gemini API, Groq Whisper STT, OpenRouter
-* **PDF Generator:** QuestPDF with embedded Bengali font support
-* **Hosting:** Render (Cloudflare CDN Integration)
+### Backend & Cloud Architecture
+* **Runtime & Framework:** .NET 8.0 SDK (C# 12)
+* **Design Pattern:** Clean Architecture (Domain, Application, Infrastructure, API Layers)
+* **Database:** MongoDB (Scalable document store for dynamic legal schemas and templates)
+* **AI Orchestration:** Google Gemini 2.5 API, Groq Whisper STT, OpenRouter integration
+* **PDF Engine:** QuestPDF with embedded font licensing for high-definition Bengali typography
+* **Hosting & CDN:** Render, Cloudflare SSL/TLS
 
 ---
 
-## 💻 লোকাল মেশিনে চালানোর নির্দেশিকা (Local Setup)
+## 🛡️ Responsible AI, Guardrails & Ethical Standards
 
-### ১. ব্যাকএন্ড চালু করা (.NET 8):
+* **Human-in-the-Loop Validation:** AI never files a legal complaint independently. Every auto-generated document requires explicit review, modification, and digital sign-off from a certified advocate.
+* **Strict Hallucination Mitigation:** Missing information is explicitly marked as `[তথ্য পাওয়া যায়নি / Not Provided]` rather than synthesized.
+* **Privacy & Anonymity:** Client telephone numbers and identifiers are masked during demonstration modes.
+
+---
+
+## 💻 Local Setup & Reproducibility Guide
+
+### Prerequisites
+* [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+* [Node.js (v18.x or v20.x)](https://nodejs.org/)
+* Angular CLI: `npm install -g @angular/cli`
+* MongoDB (Local instance or MongoDB Atlas URI)
+
+### 1. Clone the Monorepo
 ```bash
-# ব্যাকএন্ড ফোল্ডারে প্রবেশ করুন
+git clone https://github.com/prityd825/Odhikar-with-legal-hub.git
+cd Odhikar-with-legal-hub
+```
+
+### 2. Configure & Run Backend (.NET 8)
+```bash
 cd backend
-
-# ডিপেনডেন্সি রিস্টোর করুন
 dotnet restore
-
-# ব্যাকএন্ড রান করুন
 dotnet run --project Odhikar.Api
 ```
-সার্ভার চালু হবে: `http://localhost:5000` (Swagger: `http://localhost:5000/swagger`)
+* Backend API will start at: `http://localhost:5000/api`
+* Swagger UI documentation: `http://localhost:5000/swagger`
 
----
-
-### ২. ফ্রন্টএন্ড চালু করা (Angular 19):
+### 3. Configure & Run Frontend (Angular 19)
 ```bash
-# ফ্রন্টএন্ড ফোল্ডারে প্রবেশ করুন
-cd frontend
-
-# প্রয়োজনীয় প্যাকেজ ইনস্টল করুন
+cd ../frontend
 npm install
-
-# ডেভেলপমেন্ট সার্ভার রান করুন
 npm start
 ```
-ব্রাউজারে ওপেন করুন: `http://localhost:4200`
+* Open your browser and navigate to: `http://localhost:4200`
 
 ---
 
-## 📄 লাইসেন্স ও দায়িত্ব অস্বীকার (License & Disclaimer)
+## 📄 License & Disclaimer
 
-* **লাইসেন্স:** এমআইটি লাইসেন্স (MIT License) এর আওতায় উন্মুক্ত।
-* **আইনি সতর্কতা:** *এই প্ল্যাটফর্মটি প্রান্তিক জনগোষ্ঠীর প্রাথমিক আইনি সহায়তা ও খসড়া তৈরির একটি সহায়ক প্রযুক্তি মাধ্যম। এটি কোনো বিজ্ঞ আইনজীবীর চূড়ান্ত আইনি পরামর্শের বিকল্প নয়। সংশ্লিষ্ট আদালত বা সরকারি দফতরে দাখিলের পূর্বে অবশ্যই বিজ্ঞ আইনজীবী কর্তৃক নথিপত্র চূড়ান্তভাবে নিরীক্ষিত হওয়া আবশ্যক।*
+* **License:** Distributed under the [MIT License](LICENSE).
+* **Legal Disclaimer:** *Odhikar is an assistive technology platform intended to support preliminary legal intake and documentation. It does not replace professional legal representation. All legal drafts must be verified by a licensed advocate prior to submission to any court or statutory authority.*
