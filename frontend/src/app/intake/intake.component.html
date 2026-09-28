@@ -1,0 +1,391 @@
+<main class="app-shell">
+  <!-- Top Navigation Header -->
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">PROJECT ODHIKAR</p>
+      <h1>অধিকার · আপনার কণ্ঠ, আপনার অধিকার</h1>
+    </div>
+    <a class="secondary-btn flex items-center gap-1.5 cursor-pointer" routerLink="/" title="মূল পাতায় ফিরে যান">
+      <span>← মূল পাতা</span>
+    </a>
+  </header>
+
+  <section class="intake-layout">
+    <!-- Left Dark Green Sidebar Panel -->
+    <aside class="side-panel">
+      <div>
+
+        <h2>আপনার কথা</h2>
+        <p>আইনি শব্দ জানা দরকার নেই।</p>
+        <p>নিজের ভাষায় বলুন, লিখুন বা মাইক্রোফোন ব্যবহার করুন।</p>
+      </div>
+
+      <div class="trust-note">গোপনীয় · বিনামূল্যে · ১৬৪৩০ · জরুরি ৯৯৯</div>
+    </aside>
+
+    <!-- Right Interaction Workspace -->
+    <section class="workspace">
+      <!-- Section Heading & Predefined Incident / Category Cards Grid (shown during initial intake) -->
+      @if (!isComplete()) {
+      <div id="incident-selection-section" class="section-heading">
+        <div>
+          <p class="eyebrow">প্রথমে বিষয় নির্বাচন</p>
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2>কোন বিষয়ে সহায়তা চান?</h2>
+            <button type="button" (click)="toggleIncidentVoiceTour()" class="incident-voice-tour-btn"
+              [class.active]="isSpeakingIncidentTour()" title="নিরক্ষর ব্যক্তিদের জন্য প্রতিটি বিষয় ভয়েসে শুনুন">
+              <span>{{ isSpeakingIncidentTour() ? '⏹️' : '🔊' }}</span>
+              <span>{{ isSpeakingIncidentTour() ? 'ভয়েস বন্ধ করুন' : 'শুনুন' }}</span>
+            </button>
+          </div>
+        </div>
+        <span class="count">
+          {{ bengaliAnsweredCount() }}
+          @if (bengaliTotalQuestions()) {
+          /{{ bengaliTotalQuestions() }}
+          }
+          উত্তর সম্পন্ন
+        </span>
+      </div>
+
+      @if (incidentSelectionRequired() && !selectedCode()) {
+      <div class="incident-warning-bar animate-fade-in">
+        <div class="warning-text">
+          <span>⚠️</span>
+          <span>কথা বলার আগে দয়া করে নিচের তালিকা থেকে আপনার সমস্যার ধরনটি বেছে নিন।</span>
+        </div>
+        <button type="button" (click)="startIncidentVoiceTour()" class="warning-listen-btn">
+          <span>🔊</span>
+          <span>ভয়েসে শুনুন</span>
+        </button>
+      </div>
+      }
+
+      <div class="incident-grid">
+        @for (item of incidents(); track item.code) {
+        <button [id]="'incident-' + item.code" type="button" class="incident"
+          [class.selected]="selectedCode() === item.code"
+          [class.speaking-highlight]="highlightedIncidentCode() === item.code" (click)="selectIncident(item)">
+          <div class="incident-card-top">
+            <strong>{{ item.bn }}</strong>
+            <button type="button" class="mini-speaker-btn" (click)="speakSingleIncident(item, $event)"
+              title="এই বিষয়টি বাংলায় শুনুন">
+              🔊
+            </button>
+          </div>
+          <span>{{ item.description }}</span>
+        </button>
+        }
+      </div>
+      }
+
+      <!-- Case Complete: Structured Rights, Referral & Case Summary -->
+      @if (isComplete()) {
+
+      <!-- Listen Again Pill Voice Button -->
+      <div class="mt-3.5">
+        <button type="button" (click)="speakRightsAndReferral()" class="rr-listen-btn">
+          <svg width="15" height="15" class="fill-[#0a2e50] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+          </svg>
+          <span>{{
+            speechService.isSpeaking() ? "থামান" : "আবার শুনুন"
+            }}</span>
+        </button>
+      </div>
+      <div class="space-y-6 animate-fade-in w-full max-w-[560px]">
+        <!-- Rights & Legal Referral Card (Exact match to reference screenshot) -->
+        <div class="rights-referral-card space-y-5">
+          <!-- ৪ · অধিকার Section -->
+          <div>
+            <h3 class="rr-section-heading">
+              <span>অধিকার</span>
+            </h3>
+
+            <!-- Right Statement Box (Sharp corners) -->
+            <div class="rr-box">
+              {{ currentIncidentRight() }}
+            </div>
+
+            <!-- Potential Paths Box (Rounded corners) -->
+            <div class="rr-box-rounded">
+              <strong class="rr-box-title">সম্ভাব্য পথ:</strong>
+              <div class="space-y-1.5 text-[#0a2e50]">
+                @for (step of currentActionSteps(); track step) {
+                <div class="rr-step-item">
+                  <span class="font-bold">•</span>
+                  <span>{{ step }}</span>
+                </div>
+                }
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- Horizontal Divider -->
+          <hr class="rr-divider" />
+
+          <!-- ৫ · রেফারেল Section -->
+          <div>
+            <h3 class="rr-section-heading">
+              <span>রেফারেল</span>
+            </h3>
+
+            <!-- Clinic Center Header Box (Sharp corners) -->
+            <div class="rr-box">নিকটতম আইন সহায়তা কেন্দ্র</div>
+
+            <!-- Branch & Visiting Time Box (Sharp corners) -->
+            <div class="rr-box mt-3">
+              <strong class="font-bold text-[#0a2e50] block">
+                [{{
+                selectedClinic()?.name ||
+                selectedClinic()?.nameBn ||
+                selectedClinic()?.branchBn ||
+                "শাখার নাম"
+                }}]
+              </strong>
+              <div class="text-[#0a2e50] mt-1 font-normal">
+                {{
+                selectedClinic()?.availableSlotsBn?.[0] ||
+                selectedClinic()?.scheduleBn ||
+                selectedClinic()?.operatingHours ||
+                "বুধবার, সকাল ১০টায়"
+                }}
+              </div>
+            </div>
+
+            <!-- Dispatch Notice Box (Sharp corners) -->
+            <div class="rr-box mt-3">আপনার তথ্য আগেই পাঠানো হয়েছে।</div>
+          </div>
+
+          <!-- Horizontal Divider -->
+          <hr class="rr-divider" />
+
+          <!-- পুনরায় নতুন আবেদন (New Apply) Section -->
+          <div class="rr-new-apply-section">
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                (click)="speakNewApplyVoiceGuidance()"
+                class="rr-speaker-icon-btn"
+                title="ভয়েস নির্দেশ শুনুন"
+              >
+                <span>🔊</span>
+              </button>
+              <div class="rr-new-apply-text">
+                <strong>পুনরায় নতুন আবেদন</strong>
+                <span>নতুন আবেদন করতে এই সবুজ বাটনে চাপ দিন</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              id="btn-new-apply"
+              (click)="startNewApplication()"
+              class="btn-new-apply-green"
+              title="নতুন আবেদন শুরু করতে চাপ দিন"
+            >
+              <span class="text-base">📝</span>
+              <span>নতুন আবেদন করুন</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- The Active Question Card -->
+      @if (!isComplete()) {
+      <div class="question-card">
+        <div class="question-top">
+          <div class="flex items-center gap-3">
+            <div class="question-number">{{ currentStep() }}</div>
+            <div>
+              <div class="flex items-center gap-2">
+                <p class="eyebrow">নিরাপদ প্রশ্ন</p>
+                @if (speechService.isSpeakingText(currentQuestion())) {
+                <span
+                  class="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full animate-pulse border border-emerald-300">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping"></span>
+                  ভয়েসে বলা হচ্ছে...
+                </span>
+                }
+              </div>
+              <h3>{{ !selectedCode() ? "কোন বিষয়ে সহায়তা চান? প্রথমে উপরে বিষয় নির্বাচন করুন" : currentQuestion() }}
+              </h3>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" class="secondary-btn text-xs py-1.5 px-3 flex items-center gap-1"
+              [class.bg-emerald-50]="autoTtsEnabled()" [class.border-emerald-400]="autoTtsEnabled()"
+              (click)="toggleAutoTts()" [title]="
+                  autoTtsEnabled()
+                    ? 'স্বয়ংক্রিয় ভয়েস সক্রিয় রয়েছে (ক্লিক করে বন্ধ করুন)'
+                    : 'স্বয়ংক্রিয় ভয়েস বন্ধ রয়েছে (ক্লিক করে চালু করুন)'
+                ">
+              <span>{{
+                autoTtsEnabled() ? "🔊 ভয়েস চালু" : "🔇 ভয়েস বন্ধ"
+                }}</span>
+            </button>
+            <button type="button" class="secondary-btn" (click)="speakCurrentQuestion()" [title]="
+                  speechService.isSpeakingText(currentQuestion())
+                    ? 'থামান'
+                    : 'প্রশ্নটি বাংলায় শুনুন'
+                ">
+              {{
+              speechService.isSpeakingText(currentQuestion())
+              ? "⏹️ থামান"
+              : "🔊 শুনুন"
+              }}
+            </button>
+          </div>
+        </div>
+
+        <textarea [ngModel]="inputText()" (ngModelChange)="inputText.set($event)" (keydown)="onEnterPress($event)"
+          [placeholder]="selectedCode() ? 'এখানে লিখুন...' : '⚠️ কথা বলার আগে প্রথমে উপরে আপনার সমস্যার ধরন নির্বাচন করুন...'"
+          [disabled]="isLoading() || isSafetyEscalated() || isComplete() || !selectedCode()"></textarea>
+
+        <div class="voice-row">
+          <button type="button" class="voice-btn"
+            [class.recording]="speechService.isRecording() || speechService.isListening()"
+            [class.needs-selection]="!selectedCode()" (click)="toggleVoice()"
+            [disabled]="isLoading() || isSafetyEscalated() || isComplete()">
+            @if (speechService.isRecording() || speechService.isListening()) {
+            <span class="text-base">⏹️</span>
+            <span>কথা বলা শেষ</span>
+            } @else if (!selectedCode()) {
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="shrink-0" aria-hidden="true">
+              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+              <path
+                d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+            </svg>
+            <span>প্রথমে বিষয় নির্বাচন করুন</span>
+            } @else {
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" class="shrink-0" aria-hidden="true">
+              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+              <path
+                d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+            </svg>
+            <span>মাইক্রোফোনে বলুন</span>
+            }
+          </button>
+
+          <button type="button" class="secondary-btn" (click)="skipOrDontKnow()"
+            [disabled]="isLoading() || isSafetyEscalated() || isComplete() || !selectedCode()">
+            জানি না / বাদ দিন
+          </button>
+
+          <button type="button" class="primary-btn" (click)="submitAnswer()" [disabled]="
+                isLoading() ||
+                isSafetyEscalated() ||
+                isComplete() ||
+                (!selectedCode() || (!inputText().trim() && !speechService.isRecording()))
+              ">
+            {{ isLoading() ? "যাচাই হচ্ছে..." : "জমা দিন" }}
+          </button>
+        </div>
+
+        <!-- Live Recording Voice Preview -->
+        @if (speechService.isRecording() || speechService.isListening()) {
+        <div
+          class="mt-3 p-2.5 bg-red-50 border border-red-200 text-red-900 rounded-xl text-xs flex items-center gap-2 animate-pulse">
+          <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+          <span class="font-medium">রেকর্ডিং হচ্ছে... কথা বলুন (সরাসরি টেক্সটবক্সে যুক্ত হবে)</span>
+        </div>
+        }
+
+        <!-- Loading State Indicator -->
+        @if (isLoading()) {
+        <div
+          class="mt-3 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs flex items-center gap-2">
+          <div class="flex gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-bounce"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-bounce [animation-delay:0.2s]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-bounce [animation-delay:0.4s]"></span>
+          </div>
+          <span class="font-medium">অধিকার এআই পর্যালোচনা করছে...</span>
+        </div>
+        }
+
+        <!-- Error Alert with Retry -->
+        @if (errorMessage()) {
+        <div
+          class="mt-3 p-3 text-xs text-red-700 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <span>⚠️</span>
+            <span>{{ errorMessage() }}</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <button type="button" class="font-bold underline text-red-800 hover:text-red-950" (click)="submitAnswer()">
+              পুনরায় চেষ্টা
+            </button>
+            <button type="button" class="text-gray-400 hover:text-gray-600 text-sm ml-2"
+              (click)="errorMessage.set(null)">
+              ✕
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+      }
+
+      <!-- Previous Answers History Collapsible -->
+      @if (answersHistory().length > 0 && !isComplete()) {
+      <div class="bg-white border border-[#d6e3de] rounded-xl p-3 shadow-2xs">
+        <button type="button"
+          class="w-full flex items-center justify-between text-xs font-bold text-[#176b56] hover:text-[#0c493b] transition"
+          (click)="showHistory.set(!showHistory())">
+          <span class="flex items-center gap-2">
+            <span>📋</span>
+            <span>পূর্ববর্তী উত্তরসমূহ ({{ answersHistory().length }}টি উত্তর
+              সংরক্ষিত)</span>
+          </span>
+          <span>{{ showHistory() ? "▲ বন্ধ করুন" : "▼ দেখুন" }}</span>
+        </button>
+
+        @if (showHistory()) {
+        <div class="mt-3 pt-3 border-t border-gray-100 space-y-2.5">
+          @for (item of answersHistory(); track item.step) {
+          <div class="bg-[#f8faf9] p-2.5 rounded-lg border border-[#e2ece7] text-xs">
+            <div class="font-semibold text-gray-800">
+              <span class="text-[#176b56]">প্রশ্ন {{ item.step }}:</span>
+              {{ item.question }}
+            </div>
+            <div class="mt-1 text-gray-700 flex items-center gap-1.5">
+              <span class="font-medium text-emerald-800">উত্তর:</span>
+              <span>{{ item.answer }}</span>
+              @if (item.isVoice) {
+              <span
+                class="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">🎙️
+                ভয়েস</span>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
+      }
+
+      <!-- Bottom Rights Card (shown during intake questions) -->
+      @if (!isComplete()) {
+      <div class="rights-box">
+        <span class="eyebrow">আপনার অধিকার</span>
+        <p>{{ currentLegalRight() }}</p>
+        <button type="button" class="secondary-btn" (click)="speakCurrentRight()" [title]="
+              speechService.isSpeakingText(currentLegalRight())
+                ? 'থামান'
+                : 'অধিকার অডিওতে শুনুন'
+            ">
+          {{
+          speechService.isSpeakingText(currentLegalRight())
+          ? "⏹️ থামান"
+          : "অধিকার শুনুন"
+          }}
+        </button>
+      </div>
+      }
+    </section>
+  </section>
+</main>

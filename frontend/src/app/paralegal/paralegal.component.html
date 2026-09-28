@@ -1,0 +1,1348 @@
+@if (!isLoggedIn()) {
+  <app-paralegal-login></app-paralegal-login>
+} @else {
+  <main class="app-shell para-app-shell">
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        <p class="eyebrow">
+          <span class="brand-pulse-dot"></span>
+          <span>PROJECT ODHIKAR</span>
+        </p>
+        <h1>অধিকার · প্যারালেগাল কেস ডেস্ক</h1>
+        <p class="topbar-sub">
+          বাংলাদেশ বার কাউন্সিল ও জাতীয় আইনগত সহায়তা (NLASO) সমন্বিত ভার্চুয়াল
+          লিগ্যাল ডেস্ক
+        </p>
+      </div>
+
+      <div class="para-topbar-actions">
+        <!-- Profile Badge / Button -->
+        <button
+          type="button"
+          (click)="openProfileModal()"
+          class="para-profile-btn"
+          title="বিজ্ঞ আইনজীবী / প্যারালেগাল প্রোফাইল ও সনদ বিবরণী দেখুন"
+        >
+          <div class="para-profile-avatar">
+            {{ currentUser.avatarInitials }}
+          </div>
+          <div class="para-profile-meta">
+            <div class="para-profile-name-row">
+              <span class="para-profile-name">{{
+                currentUser.nameBangla
+              }}</span>
+              <span class="para-profile-verified-tag">✓ ভেরিফাইড</span>
+            </div>
+            <div class="para-profile-desig">
+              {{ currentUser.designationBangla }}
+            </div>
+          </div>
+          <span class="para-profile-chevron">▼</span>
+        </button>
+
+        <a class="btn-back-home" routerLink="/" (click)="goToHome()">
+          <span>←</span>
+          <span>মূল পাতা</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Notification Toast -->
+    @if (toastMessage) {
+      <div class="para-toast">
+        <span>{{ toastMessage }}</span>
+        <button
+          type="button"
+          class="para-toast-close"
+          (click)="toastMessage = null"
+        >
+          ✕
+        </button>
+      </div>
+    }
+
+    <!-- Top Priority / Overview Banner Card -->
+    <section class="para-banner">
+      <div class="para-banner-left">
+        <span class="para-badge-amber">
+          <span>🏛️</span>
+          <span>লিগ্যাল এইড কমান্ড সেন্টার · দৈনিক ওভারভিউ</span>
+        </span>
+        <h2 class="para-banner-title">
+          প্যারালিগ্যাল ও প্যানেল আইনজীবী কেস ডেস্ক
+        </h2>
+        <p class="para-banner-desc">
+          প্রান্তিক নাগরিক ও আইনি সহায়তা প্রার্থীদের নথি পর্যালোচনা, প্রাথমিক
+          ফ্যাক্ট-ফাইন্ডিং ও ড্রাফট অনুমোদন করুন।
+        </p>
+      </div>
+      <div class="para-banner-right">
+        <span class="para-date-tag">📅 তারিখ: {{ todayDateString }}</span>
+        <span class="para-lawyer-chip"
+          >দায়িত্বরত: {{ currentUser.nameBangla }}</span
+        >
+      </div>
+    </section>
+
+    <!-- 4 KPI Status Cards (Urgent, New, Approved, Reslot) -->
+    <section class="para-kpi-grid">
+      <!-- 1. Urgent Card -->
+      <div
+        class="para-kpi-card kpi-urgent"
+        [class.active-card]="activeTab === 'urgent'"
+        (click)="setTab('urgent')"
+        title="জরুরি কেসগুলো ফিল্টার করুন"
+      >
+        <div class="para-kpi-top">
+          <span class="para-kpi-badge badge-urgent">🚨 জরুরি কেস</span>
+          <span class="para-kpi-icon">⚡</span>
+        </div>
+        <div class="para-kpi-num">{{ urgentCount }}</div>
+        <div class="para-kpi-label">জরুরি কেস (Urgent)</div>
+        <div class="para-kpi-sub">
+          তাৎক্ষণিক নিরাপত্তা ঝুঁকি ও অগ্রাধিকার সহায়তা
+        </div>
+      </div>
+
+      <!-- 2. New Card -->
+      <div
+        class="para-kpi-card kpi-new"
+        [class.active-card]="activeTab === 'new'"
+        (click)="setTab('new')"
+        title="নতুন কেসগুলো ফিল্টার করুন"
+      >
+        <div class="para-kpi-top">
+          <span class="para-kpi-badge badge-new">📋 নতুন কেস</span>
+          <span class="para-kpi-icon">✨</span>
+        </div>
+        <div class="para-kpi-num">{{ newCount }}</div>
+        <div class="para-kpi-label">নতুন কেস (New)</div>
+        <div class="para-kpi-sub">
+          প্যারালিগ্যাল প্রাথমিক নিরীক্ষার অপেক্ষায়
+        </div>
+      </div>
+
+      <!-- 3. Approved Card -->
+      <div
+        class="para-kpi-card kpi-approved"
+        [class.active-card]="activeTab === 'approved'"
+        (click)="setTab('approved')"
+        title="অনুমোদিত কেসগুলো ফিল্টার করুন"
+      >
+        <div class="para-kpi-top">
+          <span class="para-kpi-badge badge-approved">✓ অনুমোদিত কেস</span>
+          <span class="para-kpi-icon">⚖️</span>
+        </div>
+        <div class="para-kpi-num">{{ approvedCount }}</div>
+        <div class="para-kpi-label">অনুমোদিত কেস (Approved)</div>
+        <div class="para-kpi-sub">
+          যাচাইকৃত ও অফিসিয়াল PDF ডাউনলোড প্রস্তুত
+        </div>
+      </div>
+
+      <!-- 4. Reslot Card -->
+      <div
+        class="para-kpi-card kpi-reslot"
+        [class.active-card]="activeTab === 'reassign_slot'"
+        (click)="setTab('reassign_slot')"
+        title="স্লট পুনর্নির্ধারণ কেসগুলো ফিল্টার করুন"
+      >
+        <div class="para-kpi-top">
+          <span class="para-kpi-badge badge-reslot">📅 স্লট পুনর্নির্ধারণ</span>
+          <span class="para-kpi-icon">🕒</span>
+        </div>
+        <div class="para-kpi-num">{{ reslotCount }}</div>
+        <div class="para-kpi-label">স্লট পুনর্নির্ধারণ (Reslot)</div>
+        <div class="para-kpi-sub">ক্লিনিক অ্যাপয়েন্টমেন্ট সময়সূচী বরাদ্দ</div>
+      </div>
+    </section>
+
+    <!-- Tabs Navigation Bar (Under 4 KPI Cards) -->
+    <nav class="para-main-tabs-nav">
+      <div class="para-main-tabs-container">
+        <button
+          type="button"
+          class="para-main-tab"
+          [class.active]="activeTab === 'all'"
+          (click)="setTab('all')"
+        >
+          <span>📁 সব কেস</span>
+          <span class="para-main-tab-badge">{{ cases.length }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="para-main-tab tab-new"
+          [class.active]="activeTab === 'new'"
+          (click)="setTab('new')"
+        >
+          <span>📋 নতুন কেস</span>
+          <span class="para-main-tab-badge">{{ newCount }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="para-main-tab tab-urgent"
+          [class.active]="activeTab === 'urgent'"
+          (click)="setTab('urgent')"
+        >
+          <span>🚨 জরুরি কেস</span>
+          <span class="para-main-tab-badge badge-urgent-count">{{
+            urgentCount
+          }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="para-main-tab tab-approved"
+          [class.active]="activeTab === 'approved'"
+          (click)="setTab('approved')"
+        >
+          <span>✓ অনুমোদিত কেস</span>
+          <span class="para-main-tab-badge badge-approved-count">{{
+            approvedCount
+          }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="para-main-tab tab-reslot"
+          [class.active]="activeTab === 'reassign_slot'"
+          (click)="setTab('reassign_slot')"
+        >
+          <span>📅 স্লট পুনর্নির্ধারণ</span>
+          <span class="para-main-tab-badge badge-reslot-count">{{
+            reslotCount
+          }}</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main 2-Column Dashboard Layout -->
+    <section class="para-grid">
+      <!-- Left Column: Case Queue -->
+      <div class="para-inbox-card" [class.mobile-hidden]="activeMobileView === 'detail' && selectedCase">
+        <!-- Queue Header with All Cases Pill -->
+        <div class="para-inbox-header">
+          <div class="para-inbox-title-group">
+            <span>কেস কিউ</span>
+            <span class="para-queue-badge">{{ filteredCases.length }}</span>
+          </div>
+          <div class="para-inbox-header-right">
+            <span class="para-filter-label-tag">
+              @if (activeTab === "urgent") {
+                🚨 জরুরি তালিকা
+              } @else if (activeTab === "new") {
+                📋 নতুন তালিকা
+              } @else if (activeTab === "approved") {
+                ✓ অনুমোদিত তালিকা
+            } @else if (activeTab === "reassign_slot") {
+                📅 স্লট তালিকা
+              } @else {
+                📁 সকল কেস
+              }
+            </span>
+            @if (selectedCase) {
+              <button
+                type="button"
+                class="btn-mobile-view-detail"
+                (click)="activeMobileView = 'detail'"
+                title="নির্বাচিত কেসের বিস্তারিত দেখুন"
+              >
+                বিস্তারিত →
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Filtered Case List -->
+        <div class="para-case-list">
+          @for (item of filteredCases; track item.id) {
+            <button
+              type="button"
+              class="para-case-row"
+              [class.selected]="selectedCase?.id === item.id"
+              (click)="selectCase(item)"
+            >
+              <div class="para-case-left">
+                <span
+                  class="para-dot"
+                  [class.urgent]="item.isUrgent"
+                  [class.normal]="!item.isUrgent"
+                ></span>
+
+                <div>
+                  <h4
+                    class="para-case-title"
+                    [class.text-red-700]="item.isUrgent"
+                  >
+                    {{ item.reference }}
+                  </h4>
+                  <p class="para-case-sub">{{ item.categoryDisplay }}</p>
+                </div>
+              </div>
+
+              <span
+                class="para-case-status"
+                [class.text-red-600]="item.isUrgent"
+                [class.font-bold]="item.isUrgent"
+                [class.text-emerald-600]="item.isApproved"
+              >
+                {{ item.statusDisplay }}
+              </span>
+            </button>
+          }
+
+          @if (filteredCases.length === 0) {
+            <div class="para-empty-state">
+              <span>📭</span>
+              <p>এই বিভাগে বর্তমানে কোনো কেস নেই</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right Column: Case Details & Structured Summary Pane -->
+      @if (selectedCase) {
+        <div class="para-detail-card" [class.mobile-hidden]="activeMobileView === 'queue'">
+          <!-- Mobile Return to Queue Button -->
+          <div class="mobile-nav-bar-detail">
+            <button
+              type="button"
+              class="btn-mobile-back-queue"
+              (click)="activeMobileView = 'queue'"
+            >
+              <span>← কেস তালিকায় ফিরুন (Queue)</span>
+            </button>
+          </div>
+
+          <!-- Card Top Header -->
+          <div class="para-detail-header">
+            <div>
+              <span class="para-badge-amber">
+                {{
+                  selectedCase.isUrgent
+                    ? "জরুরি পর্যালোচনা"
+                    : "সাধারণ পর্যালোচনা"
+                }}
+              </span>
+              <h3 class="para-detail-title">{{ selectedCase.reference }}</h3>
+            </div>
+
+            @if (selectedCase.scheduledSlot) {
+              <div class="booked-slot-banner">
+                <span
+                  >📅 সময়সূচী:
+                  {{ formatBengaliDate(selectedCase.scheduledSlot.date) }} ({{
+                    selectedCase.scheduledSlot.time
+                  }})</span
+                >
+              </div>
+            }
+          </div>
+
+          <!-- Detail Tab Bar: Summary vs Statutory Legal Checklist -->
+          <div class="detail-tab-nav">
+            <button
+              type="button"
+              (click)="activeDetailTab = 'summary'"
+              class="detail-tab-btn"
+              [class.active]="activeDetailTab === 'summary'"
+            >
+              <span>📋 কেস সারসংক্ষেপ ও তথ্য</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="activeDetailTab = 'checklist'"
+              class="detail-tab-btn"
+              [class.active]="activeDetailTab === 'checklist'"
+            >
+              <span>⚖️ আইনি যাচাই ও অডিট চেকলিস্ট</span>
+              <span
+                class="score-pill-header"
+                [class.high-score]="getChecklistScore(selectedCase) >= 80"
+                [class.low-score]="getChecklistScore(selectedCase) < 80"
+              >
+                {{
+                  formatBengaliNumber(getChecklistCompletedCount(selectedCase))
+                }}/{{
+                  formatBengaliNumber(getLegalChecklist(selectedCase).length)
+                }}
+                ({{ formatBengaliNumber(getChecklistScore(selectedCase)) }}%)
+              </span>
+            </button>
+          </div>
+
+          @if (activeDetailTab === "checklist") {
+            <div class="checklist-pane">
+              <!-- Statutory Legal Audit Header Card -->
+              <div class="audit-hero-card">
+                <div class="audit-hero-top">
+                  <div>
+                    <span class="audit-badge-gov">
+                      বাংলাদেশ জুডিশিয়াল প্র্যাকটিস স্ট্যান্ডার্ড
+                    </span>
+                    <h4 class="audit-hero-title">
+                      <span>আইনি গ্রহণযোগ্যতা ও নথিপত্র অডিট চেকলিস্ট</span>
+                      <span class="case-ref-chip">({{ selectedCase.reference }})</span>
+                    </h4>
+                    <p class="audit-hero-desc">
+                      বিজ্ঞ আইনজীবী / প্যারালেগাল হিসেবে মামলার আঞ্চলিক এখতিয়ার, তামাদি মেয়াদ, নথিপত্র ও আইনি ধারা যাচাই করুন।
+                    </p>
+                  </div>
+
+                  <div class="audit-hero-actions">
+                    <button
+                      type="button"
+                      (click)="markAllChecklistItems(selectedCase)"
+                      class="btn-mark-all"
+                    >
+                      <span>✓ সব যাচাই সম্পন্ন করুন</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Readiness Score Progress Bar -->
+                <div class="progress-track-wrapper">
+                  <div class="progress-label-row">
+                    <span class="progress-score-text">
+                      <strong>আইনি প্রস্তুতি স্কোর (Legal Readiness Score):</strong>
+                      <span class="progress-percent">{{ formatBengaliNumber(getChecklistScore(selectedCase)) }}%</span>
+                    </span>
+                    <span class="progress-count-text">
+                      {{ formatBengaliNumber(getChecklistCompletedCount(selectedCase)) }}টি সম্পন্ন / মোট
+                      {{ formatBengaliNumber(getLegalChecklist(selectedCase).length) }}টি দফা
+                    </span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div
+                      class="progress-bar-fill"
+                      [style.width.%]="getChecklistScore(selectedCase)"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Demo Prototype Notice Box -->
+              <div class="prototype-notice-card">
+                <span class="prototype-notice-icon">📌</span>
+                <div class="prototype-notice-content">
+                  <strong>প্রোটোটাইপ চেকলিস্ট ও রিয়েল ডাটা ভেরিফিকেশন ক্লেইম:</strong>
+                  এই চেকলিস্টটি সহকারী জজ আদালত ও লিগ্যাল এইড ফাইলিং স্ট্যান্ডার্ড অনুযায়ী প্রদর্শিত হচ্ছে। পরবর্তী সংস্করণে <strong>ই-কোর্ট এভিডেন্স ভল্ট (E-Court Vault)</strong>, <strong>ডিজিটাল নোটারি API</strong> এবং <strong>জরুরি সেফটি ট্র্যাকার</strong>-এর সাথে রিয়েল-টাইম ইন্টিগ্রেশন করা হবে।
+                </div>
+              </div>
+
+              <!-- Interactive Checklist Items Grouped by Legal Standard -->
+              <div class="checklist-items-stack">
+                @for (item of getLegalChecklist(selectedCase); track item.id) {
+                  <div
+                    (click)="toggleChecklistItem(selectedCase, item)"
+                    class="check-item-card"
+                    [class.is-checked]="item.isChecked"
+                  >
+                    <input
+                      type="checkbox"
+                      [checked]="item.isChecked"
+                      (click)="$event.stopPropagation(); toggleChecklistItem(selectedCase, item)"
+                      class="check-item-input"
+                    />
+
+                    <div class="check-item-body">
+                      <div class="check-item-top">
+                        <div class="check-item-title-row">
+                          <span class="check-item-title">{{ item.title }}</span>
+                          @if (item.isMandatory) {
+                            <span class="mandatory-pill">আবশ্যক</span>
+                          }
+                        </div>
+
+                        <span class="statutory-section-tag">
+                          § {{ item.statutoryBasis }}
+                        </span>
+                      </div>
+
+                      <p class="check-item-desc">{{ item.description }}</p>
+
+                      <div class="check-item-status-pill" [class.verified]="item.isChecked" [class.pending]="!item.isChecked">
+                        @if (item.isChecked) {
+                          <span class="status-dot-verified"></span>
+                          <span>বিজ্ঞ আইনজীবী কর্তৃক নিরীক্ষিত ও নিশ্চিতকৃত</span>
+                        } @else {
+                          <span class="status-dot-pending"></span>
+                          <span>যাচাই বাকি / নথিপত্র পর্যালোচনা প্রয়োজন</span>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+
+              <!-- Advocate's Statutory Opinion / Notes Box -->
+              <div class="advocate-notes-box">
+                <label class="advocate-notes-label">
+                  <span>📝 বিজ্ঞ আইনজীবীর পর্যবেক্ষণ ও আইনি মতামত (Advocate's Legal Opinion):</span>
+                </label>
+                <textarea
+                  [(ngModel)]="selectedCase.advocateNotes"
+                  rows="3"
+                  class="advocate-notes-textarea"
+                  placeholder="মামলার গ্রহণযোগ্যতা, তামাদি বিষয় বা অতিরিক্ত নথিপত্র সম্পর্কিত বিশেষ নোট এখানে লিখুন..."
+                ></textarea>
+                <div class="advocate-notes-footer">
+                  <span>এই মতামতটি খসড়া দরখাস্তের অফিসিয়াল কভার নোটে সংরক্ষিত থাকবে।</span>
+                  <span class="lawyer-sign-tag">আইনজীবী স্বাক্ষর প্রস্তুত</span>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Card Body (Summary Tab) -->
+          @if (activeDetailTab === "summary") {
+            <div class="para-detail-body">
+              <!-- Navy Header Bar -->
+              <div class="summary-header-bar">
+                {{ selectedCase.templateTitle || selectedCase.categoryDisplay }}
+                · কেস সারসংক্ষেপ · {{ selectedCase.reference }}
+              </div>
+
+              <!-- Structured Case Summary Table -->
+              <div class="summary-table">
+                @for (field of selectedCase.fields; track field.key) {
+                  <div class="summary-row">
+                    <div class="summary-label">{{ field.label }}</div>
+
+                    <div class="summary-val">
+                      @if (!isEditingSummary) {
+                        <div class="summary-val-text">{{ field.value }}</div>
+
+                        <!-- Badges -->
+                        @if (field.badge === "high-confidence") {
+                          <span class="badge-confidence">high confidence</span>
+                        } @else if (field.badge === "inferred") {
+                          <span class="badge-inferred">
+                            <span>{{
+                              field.badgeText || "অনুমানকৃত / Inferred"
+                            }}</span>
+                          </span>
+                        } @else if (field.badge === "none-raised") {
+                          <span class="badge-none-raised">none raised</span>
+                        } @else if (field.badge === "verified") {
+                          <span class="badge-verified"
+                            >✓ যাচাইকৃত / Verified</span
+                          >
+                        }
+                      } @else {
+                        <!-- Edit Mode: Inline Input -->
+                        <div class="flex items-center gap-2 w-full">
+                          <input
+                            type="text"
+                            class="inline-edit-input"
+                            [(ngModel)]="tempFieldValues[field.key]"
+                            [placeholder]="field.label"
+                          />
+                          @if (field.isInferred) {
+                            <span
+                              class="text-amber-600 text-sm shrink-0"
+                              title="অনুমানকৃত ফিল্ড সম্পাদনা"
+                              >✏️</span
+                            >
+                          }
+                        </div>
+
+                        @if (field.badge === "inferred") {
+                          <span class="badge-inferred text-[10px]">
+                            <span>✏️ অনুমানকৃত ফিল্ডটি সংশোধন করুন</span>
+                          </span>
+                        }
+                      }
+                    </div>
+                  </div>
+                }
+              </div>
+
+              <!-- Audio Player & Raw Transcript Box -->
+              <div class="audio-transcript-box">
+                <!-- Left Audio Player Column -->
+                <div class="audio-player-col">
+                  <button
+                    type="button"
+                    class="audio-play-btn"
+                    (click)="toggleAudioPlayback()"
+                    [title]="
+                      isPlayingAudio ? 'অডিও থামান' : 'ক্লায়েন্টের অডিও শুনুন'
+                    "
+                  >
+                    <span>{{ isPlayingAudio ? "⏸" : "▶" }}</span>
+                  </button>
+
+                  <div class="audio-info">
+                    <div>ক্লায়েন্টের অডিও</div>
+                    <span>{{ selectedCase.audioDuration }} · মূল রেকর্ডিং</span>
+                  </div>
+                </div>
+
+                <!-- Right Speech-to-Text Raw Transcript Column -->
+                <div class="transcript-col">
+                  <div class="transcript-title">
+                    Speech-to-text · raw transcript
+                  </div>
+                  <p class="text-xs text-gray-700 leading-relaxed italic m-0">
+                    {{ selectedCase.rawTranscript }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Question Bank Responses Panel (Matching Paralegal Desk Theme) -->
+              <div class="para-qb-card">
+                <!-- Collapsible Card Header Bar -->
+                <div
+                  class="para-qb-header"
+                  (click)="toggleQuestionReplies()"
+                  role="button"
+                  tabindex="0"
+                  [title]="
+                    isQuestionRepliesOpen
+                      ? 'প্রশ্নব্যাংকের প্রশ্নোত্তর তালিকা সংকুচিত করুন'
+                      : 'প্রশ্নব্যাংক অনুযায়ী ক্লায়েন্টের উত্তর দেখতে চাপ দিন'
+                  "
+                >
+                  <div class="flex items-center gap-3 flex-wrap">
+                    <div class="para-qb-icon-box">📋</div>
+                    <div>
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <h4 class="para-qb-title">
+                          প্রশ্নব্যাংক অনুযায়ী ক্লায়েন্টের প্রশ্নোত্তর ও
+                          জবানবন্দি
+                        </h4>
+                        <span class="badge-category-pill"
+                          >বিষয়: {{ selectedCase.categoryDisplay }}</span
+                        >
+                      </div>
+                      <div class="para-qb-sub">
+                        <span class="badge-counter-answered">
+                          ✓
+                          {{
+                            formatBengaliNumber(getAnsweredCount(selectedCase))
+                          }}টি উত্তর প্রাপ্ত
+                        </span>
+                        <span>·</span>
+                        <span class="badge-counter-unanswered">
+                          ⏳
+                          {{
+                            formatBengaliNumber(
+                              getUnansweredCount(selectedCase)
+                            )
+                          }}টি বাকি
+                        </span>
+                        <span
+                          >(মোট
+                          {{
+                            formatBengaliNumber(
+                              getQuestionReplies(selectedCase).length
+                            )
+                          }}টি প্রশ্ন)</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Header Right Controls -->
+                  <div
+                    class="flex items-center gap-2.5 flex-wrap"
+                    (click)="$event.stopPropagation()"
+                  >
+                    @if (
+                      isQuestionRepliesOpen &&
+                      getQuestionReplies(selectedCase).length > 0
+                    ) {
+                      <!-- Filter Tabs (Paralegal Desk Style) -->
+                      <div class="para-qb-filter-group">
+                        <button
+                          type="button"
+                          class="para-qb-filter-btn"
+                          [class.active]="qrFilterMode === 'all'"
+                          (click)="setQrFilter('all')"
+                        >
+                          সব প্রশ্ন ({{
+                            formatBengaliNumber(
+                              getQuestionReplies(selectedCase).length
+                            )
+                          }})
+                        </button>
+                        <button
+                          type="button"
+                          class="para-qb-filter-btn"
+                          [class.active]="qrFilterMode === 'answered'"
+                          (click)="setQrFilter('answered')"
+                        >
+                          উত্তর প্রাপ্ত ({{
+                            formatBengaliNumber(getAnsweredCount(selectedCase))
+                          }})
+                        </button>
+                      </div>
+
+                      <!-- Sequential Play All Audio Button -->
+                      <button
+                        type="button"
+                        id="btn-play-all-replies"
+                        class="para-qb-playall-btn"
+                        [class.playing]="isPlayingAllReplies"
+                        (click)="togglePlayAllReplies()"
+                        [title]="
+                          isPlayingAllReplies
+                            ? 'ধারাবাহিক প্লেব্যাক বন্ধ করুন'
+                            : 'সব প্রশ্ন ও উত্তর ধারাবাহিকভাবে বাংলায় শুনুন'
+                        "
+                      >
+                        <span class="playall-icon">{{
+                          isPlayingAllReplies ? "⏹️" : "🔊"
+                        }}</span>
+                        <span>{{
+                          isPlayingAllReplies
+                            ? "প্লেব্যাক থামান"
+                            : "সব উত্তর শুনুন"
+                        }}</span>
+                      </button>
+                    }
+
+                    <!-- Collapse / Expand Toggle Button -->
+                    <button
+                      type="button"
+                      class="para-qb-toggle-btn"
+                      (click)="toggleQuestionReplies()"
+                      [title]="
+                        isQuestionRepliesOpen ? 'লুকান' : 'বিস্তারিত দেখুন'
+                      "
+                    >
+                      <span>{{
+                        isQuestionRepliesOpen ? "লুকান" : "দেখুন"
+                      }}</span>
+                      <span
+                        class="toggle-arrow"
+                        [class.open]="isQuestionRepliesOpen"
+                        >▼</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Collapsible Body Content -->
+                @if (isQuestionRepliesOpen) {
+                  <div class="para-qb-body">
+                    @if (currentlyPlayingQrIndex !== null) {
+                      <div class="para-qb-playing-banner">
+                        <div class="flex items-center gap-2">
+                          <span class="audio-wave-dot"></span>
+                          <span class="text-xs font-semibold text-[#005A44]">
+                            প্রশ্ন
+                            {{
+                              formatBengaliNumber(currentlyPlayingQrIndex)
+                            }}-এর বাংলা অডিও পাঠ চলছে...
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          class="text-xs text-red-600 font-bold hover:underline"
+                          (click)="stopPlayingReplies()"
+                        >
+                          ✕ অডিও থামান
+                        </button>
+                      </div>
+                    }
+
+                    @if (
+                      getFilteredQuestionReplies(selectedCase).length === 0
+                    ) {
+                      <div class="para-qb-empty">
+                        <span>📭</span>
+                        <p>
+                          {{
+                            qrFilterMode === "answered"
+                              ? "এই কেসে এখনও কোনো প্রশ্নের সরাসরি উত্তর নথিভুক্ত হয়নি।"
+                              : "কোনো প্রশ্ন পাওয়া যায়নি।"
+                          }}
+                        </p>
+                      </div>
+                    } @else {
+                      <div class="para-qb-list">
+                        @for (
+                          qr of getFilteredQuestionReplies(selectedCase);
+                          track qr.questionNumber
+                        ) {
+                          <div
+                            class="para-qb-row"
+                            [class.active-playing]="
+                              currentlyPlayingQrIndex === qr.questionNumber
+                            "
+                            [class.is-answered]="qr.isAnswered"
+                          >
+                            <!-- Left Content Column -->
+                            <div class="para-qb-row-content">
+                              <!-- Meta Row: Step Number, Question ID, Status Badge -->
+                              <div class="para-qb-row-meta">
+                                <span
+                                  class="para-qb-step-badge"
+                                  [class.answered]="qr.isAnswered"
+                                >
+                                  প্রশ্ন
+                                  {{ formatBengaliNumber(qr.questionNumber) }}
+                                </span>
+
+                                @if (qr.questionId) {
+                                  <span class="para-qb-id-pill">
+                                    {{ qr.questionId }}
+                                  </span>
+                                }
+
+                                @if (qr.isAnswered) {
+                                  <span class="badge-confidence"
+                                    >✓ উত্তর প্রাপ্ত</span
+                                  >
+                                } @else {
+                                  <span class="badge-none-raised"
+                                    >⏳ অনুত্তরিত</span
+                                  >
+                                }
+                              </div>
+
+                              <!-- Bengali Question Text -->
+                              <h5 class="para-qb-question-text">
+                                {{ qr.question }}
+                              </h5>
+
+                              <!-- Client's Reply Statement Box -->
+                              <div
+                                class="para-qb-reply-box"
+                                [class.answered]="qr.isAnswered"
+                              >
+                                <div class="para-qb-reply-header">
+                                  <span class="reply-label"
+                                    >🗣️ ক্লায়েন্টের প্রদত্ত জবানবন্দি /
+                                    উত্তর:</span
+                                  >
+                                  @if (qr.isVoice && qr.isAnswered) {
+                                    <span class="badge-voice-recorded"
+                                      >🎙️ মূল অডিও রেকর্ড</span
+                                    >
+                                  }
+                                </div>
+                                <p
+                                  class="para-qb-reply-text"
+                                  [class.has-answer]="qr.isAnswered"
+                                >
+                                  {{
+                                    qr.isAnswered
+                                      ? "“" + qr.reply + "”"
+                                      : "তথ্য এখনও প্রদান করা হয়নি (পরবর্তী তদন্ত বা শুনানিতে সংগ্রহযোগ্য)"
+                                  }}
+                                </p>
+                              </div>
+                            </div>
+
+                            <!-- Right Audio Action Button -->
+                            <div class="para-qb-row-action">
+                              <button
+                                type="button"
+                                class="para-qb-listen-btn"
+                                [class.speaking]="
+                                  currentlyPlayingQrIndex === qr.questionNumber
+                                "
+                                (click)="togglePlayQr(qr)"
+                                [title]="
+                                  currentlyPlayingQrIndex === qr.questionNumber
+                                    ? 'প্লেব্যাক বন্ধ করুন'
+                                    : 'বাংলায় প্রশ্ন ও উত্তর শুনুন'
+                                "
+                              >
+                                <span class="listen-icon">{{
+                                  currentlyPlayingQrIndex === qr.questionNumber
+                                    ? "⏹️"
+                                    : "🔊"
+                                }}</span>
+                                <span class="listen-label">{{
+                                  currentlyPlayingQrIndex === qr.questionNumber
+                                    ? "থামান"
+                                    : "শুনুন"
+                                }}</span>
+                              </button>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Bottom Action Buttons Bar -->
+              <div
+                class="summary-actions-bar flex flex-wrap items-center gap-3"
+              >
+                @if (!isEditingSummary) {
+                  <!-- 1. Edit Summary Button -->
+                  <button
+                    type="button"
+                    class="btn-edit-summary"
+                    (click)="toggleEditSummary()"
+                    title="তথ্য সম্পাদনা করুন"
+                  >
+                    <span>✎ সারসংক্ষেপ সম্পাদনা</span>
+                  </button>
+
+                  <!-- 2. Separate Approve Case Button -->
+                  @if (!isCaseApproved()) {
+                    <button
+                      type="button"
+                      class="btn-approve-pdf bg-[#102a43] hover:bg-[#091a2a] text-white font-semibold flex items-center gap-1.5 shadow-sm"
+                      (click)="approveCase()"
+                      title="কেসটি চূড়ান্ত অনুমোদন করুন"
+                    >
+                      <span>✓ অনুমোদন করুন</span>
+                    </button>
+                  } @else {
+                    <button
+                      type="button"
+                      class="btn-approve-pdf !bg-emerald-600 text-white font-semibold flex items-center gap-1.5 cursor-default opacity-90"
+                      disabled
+                      title="কেসটি ইতিমধ্যে অনুমোদিত"
+                    >
+                      <span>✓ অনুমোদিত (Approved)</span>
+                    </button>
+                  }
+
+                  <!-- 3. Separate Download PDF Button (Only Shown When Approved) -->
+                  @if (isCaseApproved()) {
+                    <button
+                      type="button"
+                      class="btn-approve-pdf"
+                      (click)="downloadOfficialBackendPdf()"
+                      [disabled]="isDownloadingPdf"
+                      title="অফিসিয়াল আইনি আবেদন PDF ডাউনলোড করুন"
+                    >
+                      <span>{{
+                        isDownloadingPdf
+                          ? "⏳ PDF তৈরি হচ্ছে..."
+                          : "📥 PDF ডাউনলোড"
+                      }}</span>
+                    </button>
+                  }
+
+                  <!-- 4. Reassign Slot Button -->
+                  <button
+                    type="button"
+                    class="btn-reassign-slot"
+                    (click)="openReslotModal()"
+                    title="সময়সূচী পুনঃনির্ধারণ করুন"
+                  >
+                    <span>Reassign Slot</span>
+                  </button>
+                } @else {
+                  <!-- Save Changes / Cancel Edit Actions -->
+                  <button
+                    type="button"
+                    class="btn-reassign-slot"
+                    (click)="cancelEdit()"
+                  >
+                    <span>✕ বাতিল (Cancel)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-approve-pdf !bg-emerald-700 hover:!bg-emerald-800"
+                    (click)="saveSummaryEdits()"
+                  >
+                    <span>✓ সারসংক্ষেপ সংরক্ষণ করুন (Save Summary)</span>
+                  </button>
+                }
+              </div>
+            </div>
+          }
+          <!-- End activeDetailTab === 'summary' -->
+        </div>
+      }
+    </section>
+
+    <!-- =========================================================================
+       Reassign Slot Modal (Interactive Date & Time Picker with Auto Case ID)
+       ========================================================================= -->
+    @if (isReslotModalOpen) {
+      <div class="modal-backdrop" (click)="closeReslotModal()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>সময়সূচী পুনঃনির্ধারণ (Reassign Slot)</h3>
+            <button
+              type="button"
+              class="modal-close-btn"
+              (click)="closeReslotModal()"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Auto-populated Case ID -->
+            <div class="form-group">
+              <label class="form-label">কেস আইডি (Case ID)</label>
+              <input
+                type="text"
+                class="form-input bg-[#F6F3EC] font-bold text-[#005A44] cursor-not-allowed"
+                [value]="reslotCaseId"
+                readonly
+              />
+            </div>
+
+            <!-- Date Picker -->
+            <div class="form-group">
+              <label class="form-label">তারিখ নির্বাচন করুন (Date)</label>
+              <input
+                type="date"
+                class="form-input cursor-pointer"
+                [(ngModel)]="reslotDate"
+              />
+            </div>
+
+            <!-- Time Picker -->
+            <div class="form-group">
+              <label class="form-label">সময় নির্ধারণ করুন (Time Slot)</label>
+              <input
+                type="time"
+                class="form-input cursor-pointer"
+                [(ngModel)]="reslotTime"
+              />
+            </div>
+
+            <!-- Assigned Paralegal / Panel Lawyer -->
+            <div class="form-group">
+              <label class="form-label"
+                >দায়িত্বপ্রাপ্ত কর্মকর্তা / আইনজীবী</label
+              >
+              <select class="form-input" [(ngModel)]="reslotCounselor">
+                <option value="এডভোকেট সুলতানা কামাল (প্যানেল আইনজীবী)">
+                  এডভোকেট সুলতানা কামাল (প্যানেল আইনজীবী)
+                </option>
+                <option value="এডভোকেট রফিকুল ইসলাম (পারিবারিক আদালত)">
+                  এডভোকেট রফিকুল ইসলাম (পারিবারিক আদালত)
+                </option>
+                <option value="প্যারালেগাল হেল্পডেস্ক - ১ (উত্তরা অফিস)">
+                  প্যারালেগাল হেল্পডেস্ক - ১ (উত্তরা অফিস)
+                </option>
+                <option value="জাতীয় লিগ্যাল এইড অফিসার (ঢাকা)">
+                  জাতীয় লিগ্যাল এইড অফিসার (ঢাকা)
+                </option>
+              </select>
+            </div>
+
+            <!-- Consultation Notes -->
+            <div class="form-group">
+              <label class="form-label">পরামর্শের বিশেষ নোট (Notes)</label>
+              <textarea
+                class="form-input"
+                rows="2"
+                [(ngModel)]="reslotNotes"
+                placeholder="বিশেষ নির্দেশনা বা শুনানির নোট..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-reassign-slot"
+              (click)="closeReslotModal()"
+            >
+              বাতিল করুন
+            </button>
+            <button type="button" class="btn-approve-pdf" (click)="bookSlot()">
+              বুক করুন
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Permanent Offscreen Printable Draft Source (Always rendered in DOM for instant reliable Single-Page PDF capture) -->
+    <div
+      id="legal-complaint-draft-source"
+      class="legal-draft-sheet"
+      style="
+        position: fixed;
+        left: -9999px;
+        top: 0;
+        width: 750px;
+        background: #ffffff;
+        z-index: -100;
+        pointer-events: none;
+        box-sizing: border-box;
+        padding: 30px 40px;
+        font-family: &quot;Hind Siliguri&quot;, Arial, sans-serif;
+      "
+      aria-hidden="true"
+    >
+      <!-- Government Official Top Header -->
+      <div
+        style="
+          text-align: center;
+          margin-bottom: 12px;
+          border-bottom: 2px solid #005a44;
+          padding-bottom: 8px;
+        "
+      >
+        <div
+          style="
+            font-size: 16px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: 0.5px;
+          "
+        >
+          গণপ্রজাতন্ত্রী বাংলাদেশ সরকার
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 600;
+            color: #005a44;
+            margin-top: 1px;
+          "
+        >
+          আইনি প্রতিকার ও সহায়তা আবেদনপত্র
+        </div>
+      </div>
+
+      <!-- Official Government Docket & Filing Bar -->
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: #ebf4f0;
+          border: 1px solid #e2e6e3;
+          border-radius: 4px;
+          padding: 5px 12px;
+          margin-bottom: 12px;
+          font-size: 11.5px;
+        "
+      >
+        <div>
+          <span style="color: #005a44; font-weight: 600"
+            >স্মারক / কেস নম্বর:
+            {{ selectedCase?.reference || "ODH-2026-0001" }}</span
+          >
+        </div>
+        <div>
+          <span style="color: #005a44; font-weight: 600"
+            >মোকদ্দমার শ্রেণি:
+            {{
+              selectedCase?.templateTitle || selectedCase?.categoryDisplay
+            }}</span
+          >
+        </div>
+        <div>
+          <span style="color: #4b5563">তারিখ: {{ todayDateString }}</span>
+        </div>
+      </div>
+
+      <!-- Title (Centered, Bold, #102a43) -->
+      <div style="text-align: center; margin-bottom: 14px">
+        <h3
+          style="margin: 0; font-size: 15px; font-weight: 700; color: #005a44"
+        >
+          {{
+            selectedCase?.templateTitle ||
+              activeTemplate?.titleBn ||
+              "নারী ও শিশু সুরক্ষা ও অধিকার সংরক্ষণ আবেদন"
+          }}
+        </h3>
+      </div>
+
+      <!-- Application Body Text -->
+      @if (renderedBodyHtml) {
+        <div
+          style="
+            text-align: justify;
+            line-height: 1.85;
+            color: #1f2937;
+            font-size: 13px;
+          "
+          [innerHTML]="renderedBodyHtml"
+        ></div>
+      } @else {
+        <div
+          style="
+            text-align: justify;
+            line-height: 1.85;
+            color: #1f2937;
+            font-size: 13px;
+            white-space: pre-line;
+          "
+        >
+          {{ draftComplaintBody }}
+        </div>
+      }
+
+      <!-- Applicant Signature Block (Right-aligned) -->
+      <div style="margin-top: 20px; text-align: right">
+        <p
+          style="margin: 0; font-size: 12.5px; font-weight: 700; color: #111827"
+        >
+          আবেদনকারী: {{ applicantDisplayName }}
+        </p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: #4b5563">
+          স্বাক্ষর / টিপসহি: .......................................
+        </p>
+        <p style="margin: 3px 0 0 0; font-size: 11px; color: #6b7280">
+          তারিখ: {{ todayDateString }}
+        </p>
+      </div>
+
+      <!-- Legal Notice Disclaimer Box -->
+      @if (renderedDisclaimer) {
+        <div
+          style="
+            margin-top: 14px;
+            padding: 6px 10px;
+            background: #faf0db;
+            border: 1px solid #f3ddac;
+            border-radius: 4px;
+            font-size: 9.5px;
+            color: #64748b;
+            line-height: 1.45;
+          "
+        >
+          <strong style="color: #8a5800">সরকারি আইনি বিজ্ঞপ্তি:</strong>
+          {{ renderedDisclaimer }}
+        </div>
+      }
+
+      <!-- Official Footer -->
+      <div
+        style="
+          margin-top: 14px;
+          padding-top: 6px;
+          border-top: 1.5px solid #005a44;
+          display: flex;
+          justify-content: space-between;
+          font-size: 9.5px;
+          color: #6b7280;
+        "
+      >
+        <div>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার • অধিকার (Odhikar)</div>
+        <div>পৃষ্ঠা ১ / ১</div>
+      </div>
+    </div>
+    <!-- Advocate / Paralegal Profile Modal -->
+    @if (isProfileModalOpen) {
+      <div class="modal-backdrop" (click)="closeProfileModal()">
+        <div
+          class="modal-card profile-modal-card"
+          (click)="$event.stopPropagation()"
+        >
+          <!-- Modal Top Header -->
+          <div class="profile-modal-header">
+            <button
+              type="button"
+              (click)="closeProfileModal()"
+              class="modal-close-btn"
+              style="position: absolute; top: 16px; right: 20px"
+            >
+              ✕
+            </button>
+
+            <div class="profile-modal-head-inner">
+              <div class="profile-modal-avatar">
+                {{ currentUser.avatarInitials }}
+              </div>
+              <div>
+                <h3 class="profile-modal-title">
+                  <span>{{ currentUser.nameBangla }}</span>
+                  <span class="profile-verified-pill"
+                    >✓ {{ currentUser.verifiedStatus }}</span
+                  >
+                </h3>
+                <p class="profile-modal-sub">{{ currentUser.nameEnglish }}</p>
+                <p class="profile-modal-desig">
+                  {{ currentUser.designationBangla }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Body Content -->
+          <div class="modal-body">
+            <!-- Professional Credentials Grid -->
+            <div class="profile-credentials-grid">
+              <div class="cred-card">
+                <span class="cred-label">সনদ / তালিকাভুক্তি নম্বর:</span>
+                <span class="cred-val sanad-val">{{
+                  currentUser.sanadNumber
+                }}</span>
+                <span
+                  style="
+                    font-size: 10.5px;
+                    color: #648078;
+                    display: block;
+                    margin-top: 2px;
+                  "
+                  >{{ currentUser.enrolmentYear }}</span
+                >
+              </div>
+
+              <div class="cred-card">
+                <span class="cred-label">আইনজীবী সমিতি (Bar Association):</span>
+                <span class="cred-val">{{ currentUser.barAssociation }}</span>
+                <span
+                  style="
+                    font-size: 10.5px;
+                    color: #648078;
+                    display: block;
+                    margin-top: 2px;
+                  "
+                  >নিয়মিত সদস্য ও প্যানেল আইনজীবী</span
+                >
+              </div>
+
+              <div class="cred-card">
+                <span class="cred-label">অন্তর্ভুক্ত বিচারালয় ও এখতিয়ার:</span>
+                <span class="cred-val">{{ currentUser.practicingCourts }}</span>
+              </div>
+
+              <div class="cred-card">
+                <span class="cred-label">অফিসিয়াল চেম্বার ও যোগাযোগ:</span>
+                <span class="cred-val">{{ currentUser.chamberAddress }}</span>
+                <span
+                  style="
+                    font-size: 11px;
+                    color: #005a44;
+                    font-weight: 600;
+                    display: block;
+                    margin-top: 3px;
+                  "
+                  >{{ currentUser.officialEmail }} ·
+                  {{ currentUser.phone }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button type="button" (click)="logout()" class="btn-logout">
+              <span>🚪</span>
+              <span>লগআউট করুন (Logout)</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="closeProfileModal()"
+              class="btn-close-modal"
+            >
+              বন্ধ করুন (Close)
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </main>
+}

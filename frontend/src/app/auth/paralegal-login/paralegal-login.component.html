@@ -1,0 +1,150 @@
+<div class="login-page">
+  <!-- Top Ambient Glow Decorator -->
+  <div class="login-ambient-glow"></div>
+
+  <!-- Top Bar -->
+  <header class="login-header-wrap">
+    <div class="login-topbar">
+      <div class="login-brand-group">
+        <div class="brand-icon-box">
+          <span>⚖️</span>
+        </div>
+        <div class="brand-info">
+          <h1>
+            <span>প্রকল্প অধিকার</span>
+            <span class="portal-badge">প্যারালেগাল ও আইনজীবী পোর্টাল</span>
+          </h1>
+          <p class="brand-sub">
+            গণপ্রজাতন্ত্রী বাংলাদেশ সরকার অনুমোদিত লিগ্যাল এইড ও বিচারিক সহায়তা
+            প্ল্যাটফর্ম
+          </p>
+        </div>
+      </div>
+
+      <a routerLink="/" class="back-home-btn">
+        <span>←</span>
+        <span>মূল পাতায় ফিরে যান</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Login Card Area (Centered) -->
+  <main class="login-main login-main-centered">
+    <div class="login-centered-wrapper">
+      <div class="login-grid login-grid-centered">
+        <!-- Centered Official Credential Login Form Card -->
+        <div class="login-card login-card-centered">
+          <div>
+            <div class="card-header-bar">
+              <div>
+                <span class="card-step-badge">অফিসিয়াল ক্রেডেনশিয়াল</span>
+                <div class="form-title-group">
+                  <h2>আইনজীবী ও প্যারালেগাল পোর্টাল</h2>
+                </div>
+              </div>
+              <div class="form-icon-shield">🛡️</div>
+            </div>
+
+            <form (ngSubmit)="handleLogin()" class="official-form">
+              <!-- Sanad / Roll ID -->
+              <div class="form-field">
+                <label class="field-label">
+                  বাংলাদেশ বার কাউন্সিল সনদ / NLASO রেজিষ্ট্রেশন নম্বর
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    [(ngModel)]="sanadNumber"
+                    name="sanadNumber"
+                    class="form-input-text"
+                    placeholder="যেমন: BD-BAR/DHAKA/2018/14290"
+                    required
+                  />
+                  <span class="input-badge"> যাচাইযোগ্য </span>
+                </div>
+              </div>
+
+              <!-- PIN / Password -->
+              <div class="form-field">
+                <div class="field-label-row">
+                  <label class="field-label">
+                    গোপন সিকিউরিটি পিন (Security PIN)
+                  </label>
+                  <span class="field-sub-hint">ডেমো পিন: 123456</span>
+                </div>
+                <input
+                  type="password"
+                  [(ngModel)]="pinCode"
+                  name="pinCode"
+                  class="form-input-text"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+
+              <!-- Court / Attached Chamber -->
+              <div class="form-field">
+                <label class="field-label">
+                  সংযুক্ত আদালত বা লিগ্যাল এইড বিচারালয়
+                </label>
+                <select
+                  [(ngModel)]="selectedCourt"
+                  name="selectedCourt"
+                  class="form-select"
+                >
+                  @for (court of courtOptions; track court) {
+                    <option [value]="court">{{ court }}</option>
+                  }
+                </select>
+              </div>
+
+              <!-- Currently Selected Identity Info Box -->
+              <div class="identity-preview-card">
+                <span class="identity-icon">👩‍⚖️</span>
+                <div>
+                  <span class="identity-name">
+                    {{ currentSelectedProfile.nameBangla }}
+                  </span>
+                  <span class="identity-court">
+                    {{ currentSelectedProfile.designationBangla }} ·
+                    {{ currentSelectedProfile.barAssociation }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div>
+                <button
+                  type="submit"
+                  [disabled]="isLoggingIn"
+                  class="btn-submit-login"
+                >
+                  @if (isLoggingIn) {
+                    <span class="spinner"></span>
+                    <span>সনদ যাচাইকরণ চলছে...</span>
+                  } @else {
+                    <span>সুরক্ষিত লগইন সম্পন্ন করুন (Sign In) →</span>
+                  }
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="security-seal">
+            <span class="ssl-tag">
+              <span class="ssl-dot"></span>
+              ২৫৬-বিট SSL এনক্রিপ্টেড বিচারিক কানেকশন
+            </span>
+            <span>বাংলাদেশ জুডিশিয়াল সার্ভিস স্ট্যান্ডার্ড</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Official Government Footer -->
+  <footer class="login-page-footer">
+    গণপ্রজাতন্ত্রী বাংলাদেশ সরকার • জাতীয় আইনগত সহায়তা প্রদান সংস্থা (NLASO) ও
+    প্রজেক্ট অধিকার • সার্বিক সহযোগিতা ও উন্নয়নে লিগ্যাল টেক ল্যাব
+  </footer>
+</div>

@@ -1,0 +1,162 @@
+<main class="welcome-container">
+  <!-- Top Ambient Glow Decorator -->
+  <div class="ambient-glow"></div>
+
+  <!-- Header / Hero Section -->
+  <header class="welcome-header">
+    <div class="brand-badge">
+      <span class="live-dot"></span>
+      <span>প্রকল্প অধিকার · PROJECT ODHIKAR</span>
+    </div>
+
+    <h1 class="welcome-title">
+      অধিকার · <span class="highlight-text">আইনি সহায়তা সহজলভ্য করার স্মার্ট প্ল্যাটফর্ম</span>
+    </h1>
+
+    <p class="welcome-subtitle">
+      বাংলা ভয়েস প্রযুক্তি ও কৃত্রিম বুদ্ধিমত্তার মাধ্যমে প্রান্তিক মানুষের দ্রুত ও কার্যকর ন্যায়বিচার নিশ্চিতে আধুনিক আইনি প্ল্যাটফর্ম
+    </p>
+
+    <div class="national-tag">
+      <span class="tag-icon">🏛️</span>
+      <span>জাতীয় আইনগত সহায়তা ও গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের আইনি কাঠামো সমন্বিত</span>
+    </div>
+  </header>
+
+  <!-- Two Main Cards Grid -->
+  <section class="portal-grid">
+    <!-- Card 1: Client Intake Flow -->
+    <div class="portal-card card-client" routerLink="/intake">
+      <div class="card-header">
+        <div class="card-badge badge-client">
+          <span class="badge-icon">👤</span>
+          <span>নাগরিক সেবা · Client Portal</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+
+      <div class="card-icon-wrapper icon-client">
+        <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+          <line x1="8" y1="22" x2="16" y2="22"></line>
+        </svg>
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-title">নাগরিক আইনি সহায়তা আবেদন</h2>
+        <p class="card-desc">
+          আপনার আইনি সমস্যার কথা মুখে বাংলায় বলুন বা লিখে জানান। প্রযুক্তি স্বয়ংক্রিয়ভাবে তথ্য যাচাই করে আইনি অভিযোগপত্র তৈরি করবে।
+        </p>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <span class="feature-bullet">🎙️</span>
+            <span><strong>বাংলা ভয়েস ইনপুট:</strong> নিরক্ষর ও সাধারণ মানুষের জন্য সহজ অডিও রেকর্ড</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-bullet">🛡️</span>
+            <span><strong>জরুরি নিরাপত্তা অ্যালার্ট:</strong> বিপদকালীন সময়ে তাৎক্ষণিক হেল্পলাইন সহায়তা</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-bullet">📄</span>
+            <span><strong>স্বয়ংক্রিয় খসড়া:</strong> দেনমোহর, যৌতুক, জমি বিরোধ ও নারী সুরক্ষা মামলার ফরম্যাট</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-footer">
+        <a class="btn-portal btn-client" routerLink="/intake">
+          <span>আবেদন শুরু করুন</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2: Paralegal Desk -->
+    <div class="portal-card card-paralegal" routerLink="/paralegal">
+      <div class="card-header">
+        <div class="card-badge badge-paralegal">
+          <span class="badge-icon">⚖️</span>
+          <span>প্যারালেগাল ডেক্স · Paralegal Desk</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a
+            routerLink="/paralegal/login"
+            (click)="$event.stopPropagation()"
+            class="text-[11px] bg-white/20 hover:bg-white/30 text-white px-2.5 py-1 rounded-full font-semibold transition-all border border-white/30 cursor-pointer"
+            title="প্যারালেগাল ও আইনজীবী লগইন পোর্টাল"
+          >
+            🔒 লগইন
+          </a>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="card-icon-wrapper icon-paralegal">
+        <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+          <path d="m9 14 2 2 4-4"></path>
+        </svg>
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-title">প্যারালিগ্যাল কার্যতালিকা ও ড্যাশবোর্ড</h2>
+        <p class="card-desc">
+          আবেদনসমূহ পর্যালোচনা, সত্যতা যাচাই, খসড়া সম্পাদন, অনুমোদন এবং লিগ্যাল এইড ক্লিনিক অ্যাপয়েন্টমেন্ট সময়সূচী বরাদ্দ করুন।
+        </p>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <span class="feature-bullet">🚨</span>
+            <span><strong>স্মার্ট শ্রেণীকরণ:</strong> জরুরি, নতুন, অনুমোদিত ও পুনঃনির্ধারণ চার ভাগে বিভক্ত</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-bullet">✍️</span>
+            <span><strong>খসড়া পর্যালোচনা ও সম্পাদনা:</strong> আবেদনকারীর তথ্যাদি ও আইনি ধারা সংশোধন</span>
+          </li>
+          <li class="feature-item">
+            <span class="feature-bullet">📥</span>
+            <span><strong>অনুমোদন ও PDF ডাউনলোড:</strong> আদালতের গ্রহণযোগ্য এক পৃষ্ঠার প্রস্তুতকৃত দরখাস্ত</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-footer">
+        <a class="btn-portal btn-paralegal" routerLink="/paralegal">
+          <span>প্যারালিগ্যাল ডেক্সে প্রবেশ করুন</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Trust & Stats Bar -->
+  <footer class="welcome-footer">
+    <div class="trust-item">
+      <span class="trust-icon">⚡</span>
+      <div>
+        <h4>রিয়েল-টাইম ক্লাউড ডেটা</h4>
+        <p>MongoDB ডাটাবেসে তাৎক্ষণিক সংরক্ষিত</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <span class="trust-icon">🔒</span>
+      <div>
+        <h4>সম্পূর্ণ গোপনীয় ও নিরাপদ</h4>
+        <p>ব্যক্তিগত সংবেদনশীল তথ্যের সর্বোচ্চ নিরাপত্তা</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <span class="trust-icon">📞</span>
+      <div>
+        <h4>জাতীয় লিগ্যাল এইড ১৬৪৩০</h4>
+        <p>বিনামূল্যে সরকারি আইনি পরামর্শ হেল্পলাইন</p>
+      </div>
+    </div>
+  </footer>
+</main>
