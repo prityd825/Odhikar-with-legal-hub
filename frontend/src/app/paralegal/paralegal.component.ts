@@ -60,6 +60,92 @@ export class ParalegalComponent implements OnInit {
   isProfileModalOpen = false;
   activeDetailTab: 'summary' | 'checklist' = 'summary';
 
+  // Desk View Mode: 'table' (cases table overview) vs 'detail' (individual case workspace)
+  currentDeskView: 'table' | 'detail' = 'table';
+  searchQuery: string = '';
+  categoryFilter: string = 'ALL';
+
+  viewCase(item: ParalegalCase): void {
+    this.selectCase(item);
+    this.isEditingSummary = false;
+    this.currentDeskView = 'detail';
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  editCase(item: ParalegalCase): void {
+    this.selectCase(item);
+    this.currentDeskView = 'detail';
+    this.isEditingSummary = true;
+    this.tempFieldValues = {};
+    if (item.fields) {
+      for (const f of item.fields) {
+        this.tempFieldValues[f.key] = f.value;
+      }
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  backToTable(): void {
+    this.currentDeskView = 'table';
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  get displayedCases(): ParalegalCase[] {
+    let list = this.filteredCases;
+    if (this.categoryFilter && this.categoryFilter !== 'ALL') {
+      list = list.filter(c => this.normalizeParentCategoryCode(c.category) === this.categoryFilter);
+    }
+    if (this.searchQuery && this.searchQuery.trim() !== '') {
+      const q = this.searchQuery.trim().toLowerCase();
+      list = list.filter(c =>
+        (c.reference && c.reference.toLowerCase().includes(q)) ||
+        (c.categoryDisplay && c.categoryDisplay.toLowerCase().includes(q)) ||
+        (c.statusDisplay && c.statusDisplay.toLowerCase().includes(q)) ||
+        (c.district && c.district.toLowerCase().includes(q)) ||
+        ((c as any).applicant && (c as any).applicant.toLowerCase().includes(q)) ||
+        (c.narrative && c.narrative.toLowerCase().includes(q)) ||
+        (this.getApplicantName(c).toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }
+
+  getApplicantName(c: ParalegalCase | null): string {
+    if (!c) return 'আবেদনকারী নাগরিক';
+    const found = c.fields?.find(f =>
+      f.key.toLowerCase().includes('applicant') ||
+      f.key.toLowerCase().includes('worker') ||
+      f.key.toLowerCase().includes('mother') ||
+      f.key.toLowerCase().includes('victim')
+    );
+    if (found && found.value && !found.value.includes('তথ্য পাওয়া যায়নি') && !found.value.includes('জানা নেই')) {
+      return found.value.trim();
+    }
+    const applicantVal = (c as any).applicant;
+    if (applicantVal && !applicantVal.includes('তথ্য পাওয়া যায়নি') && !applicantVal.includes('জানা নেই')) {
+      return applicantVal.trim();
+    }
+    return 'আবেদনকারী নাগরিক';
+  }
+
+  getCategoryIcon(categoryCode: string): string {
+    const code = this.normalizeParentCategoryCode(categoryCode);
+    switch (code) {
+      case 'DOWER_MAINTENANCE': return '⚖️';
+      case 'DOWRY_DOMESTIC_VIOLENCE': return '🛡️';
+      case 'LABOUR_WAGE': return '💼';
+      case 'LAND_PROPERTY': return '🏡';
+      case 'WOMEN_CHILD_PROTECTION': return '👩‍👧';
+      default: return '📜';
+    }
+  }
+
   openProfileModal(): void {
     this.isProfileModalOpen = true;
   }
@@ -284,6 +370,9 @@ export class ParalegalComponent implements OnInit {
           if (targetCaseId) {
             const found = this.cases.find(c => c.id === targetCaseId || c.reference === targetCaseId);
             this.selectedCase = found || this.cases[0];
+            if (this.initialCaseId && found) {
+              this.currentDeskView = 'detail';
+            }
           } else {
             this.selectedCase = this.cases[0];
           }
