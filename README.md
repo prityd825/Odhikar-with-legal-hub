@@ -9,7 +9,7 @@
 
 ---
 
-## 🌟 Executive Summary & Scholarship Context
+## 🌟 Executive Summary
 
 **Odhikar** (*Bengali for "Rights"*) is an end-to-end legal-technology platform designed to democratize access to justice in the Global South, directly contributing to the **United Nations Sustainable Development Goals (UN SDGs)**:
 * **SDG 16 (Peace, Justice, and Strong Institutions):** Providing equal, timely access to legal aid for disadvantaged populations.
