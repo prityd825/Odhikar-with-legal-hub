@@ -3,24 +3,29 @@
    ========================================================================== */
 
 .para-app-shell {
-  background-color: #F6F3EC;
-  color: #1A2421;
+  background: radial-gradient(circle at 50% 0%, #edf7f3 0%, #f8fafc 55%, #f1f5f9 100%);
+  color: #0f172a;
   min-height: 100vh;
   padding: 24px clamp(18px, 4vw, 48px);
-  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
 }
 
 /* Topbar Header */
 .topbar {
   max-width: 1360px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 22px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #D6E3DE;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
 }
 
 .topbar-brand {

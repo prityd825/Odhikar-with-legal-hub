@@ -1,0 +1,10 @@
+{
+  "name": "odhikar-with-legal-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Odhikar (অধিকার) - AI Legal Aid & Case Management Platform",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd frontend && npm start"
+  }
+}

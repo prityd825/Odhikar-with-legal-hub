@@ -1,9 +1,9 @@
 /* Paralegal & Advocate Secure Login - Project Odhikar Palette */
 .login-page {
   min-height: 100vh;
-  background-color: #F6F3EC;
-  color: #1A2421;
-  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 0%, #edf7f3 0%, #f8fafc 55%, #f1f5f9 100%);
+  color: #0f172a;
+  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,7 +20,7 @@
   transform: translateX(-50%);
   width: 750px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0, 90, 68, 0.08) 0%, rgba(246, 243, 236, 0) 70%);
+  background: radial-gradient(circle, rgba(4, 120, 87, 0.08) 0%, rgba(241, 245, 249, 0) 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -38,8 +38,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #E2E6E3;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
 }
 
 .login-brand-group {
@@ -49,22 +54,22 @@
 }
 
 .brand-icon-box {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: #005A44;
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  box-shadow: 0 4px 12px rgba(0, 90, 68, 0.2);
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
 }
 
 .brand-info h1 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #1A2421;
+  color: #0f172a;
   margin: 0;
   display: flex;
   align-items: center;
@@ -75,18 +80,18 @@
 .portal-badge {
   font-size: 11px;
   font-weight: 700;
-  background: #EBF4F0;
-  color: #005A44;
-  border: 1px solid #C7DFD6;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
   padding: 3px 10px;
   border-radius: 9999px;
   letter-spacing: 0.04em;
 }
 
 .brand-sub {
-  font-size: 12.5px;
-  color: #6C7873;
-  margin: 3px 0 0 0;
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0 0;
 }
 
 .back-home-btn {
@@ -94,21 +99,23 @@
   align-items: center;
   gap: 6px;
   background: #FFFFFF;
-  border: 1px solid #D6E3DE;
-  color: #1A2421;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
 }
 
 .back-home-btn:hover {
-  background: #EBF4F0;
-  border-color: #005A44;
-  color: #005A44;
+  background: #f8fafc;
+  border-color: #047857;
+  color: #047857;
+  transform: translateY(-1px);
 }
 
 /* Main Container */
