@@ -11,19 +11,18 @@
         </div>
         <div class="brand-info">
           <h1>
-            <span>প্রকল্প অধিকার</span>
-            <span class="portal-badge">প্যারালেগাল ও আইনজীবী পোর্টাল</span>
+            <span>প্রকল্প অধিকার · Project Odhikar</span>
+            <span class="portal-badge">প্যারালেগাল ও আইনজীবী পোর্টাল · Paralegal Portal</span>
           </h1>
           <p class="brand-sub">
-            গণপ্রজাতন্ত্রী বাংলাদেশ সরকার অনুমোদিত লিগ্যাল এইড ও বিচারিক সহায়তা
-            প্ল্যাটফর্ম
+            গণপ্রজাতন্ত্রী বাংলাদেশ সরকার অনুমোদিত লিগ্যাল এইড ও বিচারিক সহায়তা প্ল্যাটফর্ম · Judicial Legal Aid Platform
           </p>
         </div>
       </div>
 
-      <a routerLink="/" class="back-home-btn">
+      <a routerLink="/" class="back-home-btn" title="মূল পাতায় ফিরে যান | Back to Home">
         <span>←</span>
-        <span>মূল পাতায় ফিরে যান</span>
+        <span>মূল পাতায় ফিরে যান · Home</span>
       </a>
     </div>
   </header>
@@ -37,9 +36,9 @@
           <div>
             <div class="card-header-bar">
               <div>
-                <span class="card-step-badge">অফিসিয়াল ক্রেডেনশিয়াল</span>
+                <span class="card-step-badge">অফিসিয়াল ক্রেডেনশিয়াল · Official Credentials</span>
                 <div class="form-title-group">
-                  <h2>আইনজীবী ও প্যারালেগাল পোর্টাল</h2>
+                  <h2>আইনজীবী ও প্যারালেগাল পোর্টাল · Advocate & Paralegal Login</h2>
                 </div>
               </div>
               <div class="form-icon-shield">🛡️</div>
@@ -49,7 +48,7 @@
               <!-- Sanad / Roll ID -->
               <div class="form-field">
                 <label class="field-label">
-                  বাংলাদেশ বার কাউন্সিল সনদ / NLASO রেজিষ্ট্রেশন নম্বর
+                  বাংলাদেশ বার কাউন্সিল সনদ / NLASO রেজিষ্ট্রেশন নম্বর · Bar Council Sanad / NLASO Reg No
                 </label>
                 <div class="input-wrapper">
                   <input
@@ -57,10 +56,10 @@
                     [(ngModel)]="sanadNumber"
                     name="sanadNumber"
                     class="form-input-text"
-                    placeholder="যেমন: BD-BAR/DHAKA/2018/14290"
+                    placeholder="যেমন / e.g.: BD-BAR/DHAKA/2018/14290"
                     required
                   />
-                  <span class="input-badge"> যাচাইযোগ্য </span>
+                  <span class="input-badge">যাচাইযোগ্য · Verifiable</span>
                 </div>
               </div>
 
@@ -68,9 +67,9 @@
               <div class="form-field">
                 <div class="field-label-row">
                   <label class="field-label">
-                    গোপন সিকিউরিটি পিন (Security PIN)
+                    গোপন সিকিউরিটি পিন · Security PIN
                   </label>
-                  <span class="field-sub-hint">ডেমো পিন: 123456</span>
+                  <span class="field-sub-hint">ডেমো পিন · Demo PIN: 123456</span>
                 </div>
                 <input
                   type="password"
@@ -85,7 +84,7 @@
               <!-- Court / Attached Chamber -->
               <div class="form-field">
                 <label class="field-label">
-                  সংযুক্ত আদালত বা লিগ্যাল এইড বিচারালয়
+                  সংযুক্ত আদালত বা লিগ্যাল এইড বিচারালয় · Attached Court / Forum
                 </label>
                 <select
                   [(ngModel)]="selectedCourt"
@@ -121,9 +120,9 @@
                 >
                   @if (isLoggingIn) {
                     <span class="spinner"></span>
-                    <span>সনদ যাচাইকরণ চলছে...</span>
+                    <span>সনদ যাচাইকরণ চলছে... · Verifying...</span>
                   } @else {
-                    <span>সুরক্ষিত লগইন সম্পন্ন করুন (Sign In) →</span>
+                    <span>সুরক্ষিত লগইন সম্পন্ন করুন · Secure Sign In →</span>
                   }
                 </button>
               </div>
@@ -133,9 +132,9 @@
           <div class="security-seal">
             <span class="ssl-tag">
               <span class="ssl-dot"></span>
-              ২৫৬-বিট SSL এনক্রিপ্টেড বিচারিক কানেকশন
+              ২৫৬-বিট SSL এনক্রিপ্টেড বিচারিক কানেকশন · 256-Bit SSL Encrypted
             </span>
-            <span>বাংলাদেশ জুডিশিয়াল সার্ভিস স্ট্যান্ডার্ড</span>
+            <span>বাংলাদেশ জুডিশিয়াল সার্ভিস স্ট্যান্ডার্ড · Judicial Service Standard</span>
           </div>
         </div>
       </div>
@@ -144,7 +143,6 @@
 
   <!-- Official Government Footer -->
   <footer class="login-page-footer">
-    গণপ্রজাতন্ত্রী বাংলাদেশ সরকার • জাতীয় আইনগত সহায়তা প্রদান সংস্থা (NLASO) ও
-    প্রজেক্ট অধিকার • সার্বিক সহযোগিতা ও উন্নয়নে লিগ্যাল টেক ল্যাব
+    গণপ্রজাতন্ত্রী বাংলাদেশ সরকার • জাতীয় আইনগত সহায়তা প্রদান সংস্থা (NLASO) ও প্রজেক্ট অধিকার • Government of Bangladesh & Project Odhikar Legal Tech Lab
   </footer>
 </div>

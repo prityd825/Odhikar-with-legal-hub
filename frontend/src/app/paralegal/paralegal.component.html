@@ -19,9 +19,9 @@
             <span class="brand-pulse-dot"></span>
             <span>PROJECT ODHIKAR · PARALEGAL DESK</span>
           </p>
-          <h1>অধিকার · প্যারালেগাল ও আইনজীবী কেস ডেস্ক</h1>
+          <h1>অধিকার · প্যারালেগাল ও আইনজীবী কেস ডেস্ক <span class="text-sm font-medium text-slate-500 block sm:inline">· Paralegal Case Registry</span></h1>
           <p class="topbar-sub">
-            বাংলাদেশ বার কাউন্সিল ও জাতীয় আইনগত সহায়তা (NLASO) সমন্বিত ভার্চুয়াল লিগ্যাল ডেস্ক
+            বাংলাদেশ বার কাউন্সিল ও জাতীয় আইনগত সহায়তা (NLASO) সমন্বিত ভার্চুয়াল লিগ্যাল ডেস্ক · Virtual Legal Aid & Advocate Desk
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@
           type="button"
           (click)="openProfileModal()"
           class="para-profile-btn"
-          title="বিজ্ঞ আইনজীবী / প্যারালেগাল প্রোফাইল ও সনদ বিবরণী দেখুন"
+          title="বিজ্ঞ আইনজীবী / প্যারালেগাল প্রোফাইল ও সনদ বিবরণী দেখুন | Advocate Profile"
         >
           <div class="para-profile-avatar">
             {{ currentUser.avatarInitials }}
@@ -42,7 +42,7 @@
               <span class="para-profile-name">{{
                 currentUser.nameBangla
               }}</span>
-              <span class="para-profile-verified-tag">✓ ভেরিফাইড</span>
+              <span class="para-profile-verified-tag">✓ ভেরিফাইড · Verified</span>
             </div>
             <div class="para-profile-desig">
               {{ currentUser.designationBangla }}
@@ -51,9 +51,9 @@
           <span class="para-profile-chevron">▼</span>
         </button>
 
-        <a class="btn-back-home" routerLink="/" (click)="goToHome()">
+        <a class="btn-back-home" routerLink="/" (click)="goToHome()" title="মূল পাতায় ফিরে যান | Home">
           <span>←</span>
-          <span>মূল পাতা</span>
+          <span>মূল পাতা · Home</span>
         </a>
       </div>
     </header>
@@ -77,20 +77,20 @@
       <div class="para-banner-left">
         <span class="para-badge-amber">
           <span>🏛️</span>
-          <span>লিগ্যাল এইড কমান্ড সেন্টার · দৈনিক ওভারভিউ</span>
+          <span>লিগ্যাল এইড কমান্ড সেন্টার · Legal Aid Command Center</span>
         </span>
         <h2 class="para-banner-title">
-          প্যারালিগ্যাল ও প্যানেল আইনজীবী কেস ডেস্ক
+          প্যারালিগ্যাল ও প্যানেল আইনজীবী কেস ডেস্ক · Advocate & Paralegal Desk
         </h2>
         <p class="para-banner-desc">
-          প্রান্তিক নাগরিক ও আইনি সহায়তা প্রার্থীদের নথি পর্যালোচনা, প্রাথমিক
-          ফ্যাক্ট-ফাইন্ডিং ও ড্রাফট অনুমোদন করুন।
+          প্রান্তিক নাগরিক ও আইনি সহায়তা প্রার্থীদের নথি পর্যালোচনা, প্রাথমিক ফ্যাক্ট-ফাইন্ডিং ও ড্রাফট অনুমোদন করুন।
+          <span class="block mt-0.5 text-xs text-slate-500 font-normal">Review citizen legal intake petitions, audit statutory jurisdiction, and approve court-ready filings.</span>
         </p>
       </div>
       <div class="para-banner-right">
-        <span class="para-date-tag">📅 তারিখ: {{ todayDateString }}</span>
+        <span class="para-date-tag">📅 তারিখ / Date: {{ todayDateString }}</span>
         <span class="para-lawyer-chip"
-          >দায়িত্বরত: {{ currentUser.nameBangla }}</span
+          >দায়িত্বরত / Officer: {{ currentUser.nameBangla }}</span
         >
       </div>
     </section>
@@ -103,16 +103,16 @@
           class="para-kpi-card kpi-urgent"
           [class.active-card]="activeTab === 'urgent'"
           (click)="setTab('urgent')"
-          title="জরুরি কেসগুলো ফিল্টার করুন"
+          title="জরুরি কেসগুলো ফিল্টার করুন | Filter Urgent Cases"
         >
           <div class="para-kpi-top">
-            <span class="para-kpi-badge badge-urgent">🚨 জরুরি কেস</span>
+            <span class="para-kpi-badge badge-urgent">🚨 জরুরি · Urgent</span>
             <span class="para-kpi-icon">⚡</span>
           </div>
           <div class="para-kpi-num">{{ urgentCount }}</div>
-          <div class="para-kpi-label">জরুরি কেস (Urgent)</div>
+          <div class="para-kpi-label">জরুরি কেস (Urgent Cases)</div>
           <div class="para-kpi-sub">
-            তাৎক্ষণিক নিরাপত্তা ঝুঁকি ও অগ্রাধিকার সহায়তা
+            তাৎক্ষণিক নিরাপত্তা ঝুঁকি ও অগ্রাধিকার সহায়তা · High Priority Triage
           </div>
         </div>
 
@@ -121,16 +121,16 @@
           class="para-kpi-card kpi-new"
           [class.active-card]="activeTab === 'new'"
           (click)="setTab('new')"
-          title="নতুন কেসগুলো ফিল্টার করুন"
+          title="নতুন কেসগুলো ফিল্টার করুন | Filter New Cases"
         >
           <div class="para-kpi-top">
-            <span class="para-kpi-badge badge-new">📋 নতুন কেস</span>
+            <span class="para-kpi-badge badge-new">📋 নতুন · New</span>
             <span class="para-kpi-icon">✨</span>
           </div>
           <div class="para-kpi-num">{{ newCount }}</div>
-          <div class="para-kpi-label">নতুন কেস (New)</div>
+          <div class="para-kpi-label">নতুন কেস (New Intakes)</div>
           <div class="para-kpi-sub">
-            প্যারালিগ্যাল প্রাথমিক নিরীক্ষার অপেক্ষায়
+            প্যারালিগ্যাল প্রাথমিক নিরীক্ষার অপেক্ষায় · Awaiting Initial Review
           </div>
         </div>
 
@@ -139,16 +139,16 @@
           class="para-kpi-card kpi-approved"
           [class.active-card]="activeTab === 'approved'"
           (click)="setTab('approved')"
-          title="অনুমোদিত কেসগুলো ফিল্টার করুন"
+          title="অনুমোদিত কেসগুলো ফিল্টার করুন | Filter Approved Cases"
         >
           <div class="para-kpi-top">
-            <span class="para-kpi-badge badge-approved">✓ অনুমোদিত কেস</span>
+            <span class="para-kpi-badge badge-approved">✓ অনুমোদিত · Approved</span>
             <span class="para-kpi-icon">⚖️</span>
           </div>
           <div class="para-kpi-num">{{ approvedCount }}</div>
-          <div class="para-kpi-label">অনুমোদিত কেস (Approved)</div>
+          <div class="para-kpi-label">অনুমোদিত কেস (Approved Cases)</div>
           <div class="para-kpi-sub">
-            যাচাইকৃত ও অফিসিয়াল PDF ডাউনলোড প্রস্তুত
+            যাচাইকৃত ও অফিসিয়াল PDF ডাউনলোড প্রস্তুত · Verified & Ready for Court
           </div>
         </div>
 
@@ -157,15 +157,15 @@
           class="para-kpi-card kpi-reslot"
           [class.active-card]="activeTab === 'reassign_slot'"
           (click)="setTab('reassign_slot')"
-          title="স্লট পুনর্নির্ধারণ কেসগুলো ফিল্টার করুন"
+          title="স্লট পুনর্নির্ধারণ কেসগুলো ফিল্টার করুন | Filter Reslot Cases"
         >
           <div class="para-kpi-top">
-            <span class="para-kpi-badge badge-reslot">📅 স্লট পুনর্নির্ধারণ</span>
+            <span class="para-kpi-badge badge-reslot">📅 পুনঃনির্ধারণ · Reslot</span>
             <span class="para-kpi-icon">🕒</span>
           </div>
           <div class="para-kpi-num">{{ reslotCount }}</div>
-          <div class="para-kpi-label">স্লট পুনর্নির্ধারণ (Reslot)</div>
-          <div class="para-kpi-sub">ক্লিনিক অ্যাপয়েন্টমেন্ট সময়সূচী বরাদ্দ</div>
+          <div class="para-kpi-label">স্লট পুনর্নির্ধারণ (Reslot Cases)</div>
+          <div class="para-kpi-sub">ক্লিনিক অ্যাপয়েন্টমেন্ট সময়সূচী বরাদ্দ · Schedule Legal Clinic</div>
         </div>
       </section>
 
@@ -178,7 +178,7 @@
             [class.active]="activeTab === 'all'"
             (click)="setTab('all')"
           >
-            <span>📁 সব কেস</span>
+            <span>📁 সব কেস · All</span>
             <span class="para-main-tab-badge">{{ cases.length }}</span>
           </button>
 
@@ -188,7 +188,7 @@
             [class.active]="activeTab === 'new'"
             (click)="setTab('new')"
           >
-            <span>📋 নতুন কেস</span>
+            <span>📋 নতুন কেস · New</span>
             <span class="para-main-tab-badge">{{ newCount }}</span>
           </button>
 
@@ -198,7 +198,7 @@
             [class.active]="activeTab === 'urgent'"
             (click)="setTab('urgent')"
           >
-            <span>🚨 জরুরি কেস</span>
+            <span>🚨 জরুরি কেস · Urgent</span>
             <span class="para-main-tab-badge badge-urgent-count">{{
               urgentCount
             }}</span>
@@ -210,7 +210,7 @@
             [class.active]="activeTab === 'approved'"
             (click)="setTab('approved')"
           >
-            <span>✓ অনুমোদিত কেস</span>
+            <span>✓ অনুমোদিত · Approved</span>
             <span class="para-main-tab-badge badge-approved-count">{{
               approvedCount
             }}</span>
@@ -222,7 +222,7 @@
             [class.active]="activeTab === 'reassign_slot'"
             (click)="setTab('reassign_slot')"
           >
-            <span>📅 স্লট পুনর্নির্ধারণ</span>
+            <span>📅 স্লট পুনর্নির্ধারণ · Reslot</span>
             <span class="para-main-tab-badge badge-reslot-count">{{
               reslotCount
             }}</span>
@@ -237,11 +237,12 @@
           <div class="para-toolbar-top">
             <div class="para-toolbar-title-box">
               <h3 class="para-toolbar-title">
-                <span>মামলা ও আবেদন রেজিস্ট্রি তালিকা</span>
-                <span class="para-count-pill">{{ displayedCases.length }}টি কেস প্রদর্শিত</span>
+                <span>মামলা ও আবেদন রেজিস্ট্রি তালিকা · Case Registry</span>
+                <span class="para-count-pill">{{ displayedCases.length }} টি প্রদর্শিত · Shown</span>
               </h3>
               <p class="para-toolbar-sub">
                 নাগরিকদের আইনি সহায়তা আবেদন পর্যালোচনা করতে ‘দেখুন’ বা ‘সম্পাদনা’ বাটনে ক্লিক করে বিস্তারিত ওয়ার্কস্পেসে প্রবেশ করুন।
+                <span class="block mt-0.5 text-xs text-slate-500 font-normal">Click 'View' or 'Edit' to open the individual case dossier, statutory checklist, and court petition draft.</span>
               </p>
             </div>
 
@@ -251,7 +252,7 @@
                 type="text"
                 class="para-search-input"
                 [(ngModel)]="searchQuery"
-                placeholder="কেস আইডি, আবেদনকারী, জেলা বা বিষয় দিয়ে খুঁজুন..."
+                placeholder="কেস আইডি, নাগরিক, জেলা বা বিষয় দিয়ে খুঁজুন / Search ID, name, district..."
               />
               @if (searchQuery) {
                 <button type="button" class="para-search-clear" (click)="searchQuery = ''">✕</button>
@@ -262,27 +263,27 @@
           <div class="para-toolbar-filters">
             <!-- Category Filter Dropdown -->
             <div class="para-filter-select-wrapper">
-              <label class="para-filter-label">আইনি বিষয়:</label>
+              <label class="para-filter-label">আইনি বিষয় · Category:</label>
               <select class="para-category-select" [(ngModel)]="categoryFilter">
-                <option value="ALL">সকল আইনি বিষয় (All Categories)</option>
-                <option value="DOWER_MAINTENANCE">⚖️ দেনমোহর / ভরণপোষণ</option>
-                <option value="DOWRY_DOMESTIC_VIOLENCE">🛡️ যৌতুক / পারিবারিক সহিংসতা</option>
-                <option value="LABOUR_WAGE">💼 বকেয়া মজুরি / শ্রম বিরোধ</option>
-                <option value="LAND_PROPERTY">🏡 জমি / সম্পত্তি বিরোধ</option>
-                <option value="WOMEN_CHILD_PROTECTION">👩‍👧 নারী ও শিশু সুরক্ষা</option>
-                <option value="OTHER">📜 অন্যান্য আইনি সমস্যা</option>
+                <option value="ALL">সকল আইনি বিষয় · All Legal Areas</option>
+                <option value="DOWER_MAINTENANCE">⚖️ দেনমোহর ও খোরপোশ · Dower & Maintenance</option>
+                <option value="DOWRY_DOMESTIC_VIOLENCE">🛡️ যৌতুক ও সহিংসতা · Dowry & Domestic Violence</option>
+                <option value="LABOUR_WAGE">💼 বকেয়া মজুরি ও শ্রম বিরোধ · Labour & Wage</option>
+                <option value="LAND_PROPERTY">🏡 জমি ও সম্পত্তি বিরোধ · Land & Property</option>
+                <option value="WOMEN_CHILD_PROTECTION">👩‍👧 নারী ও শিশু সুরক্ষা · Child Custody & Protection</option>
+                <option value="OTHER">📜 অন্যান্য আইনি সমস্যা · Other Statutory Matters</option>
               </select>
             </div>
 
             <!-- Tab Filter Indicator -->
             <div class="para-active-tab-indicator">
-              <span>সক্রিয় ক্যাটাগরি:</span>
+              <span>সক্রিয় ক্যাটাগরি · Active:</span>
               <span class="active-tab-chip">
-                @if (activeTab === 'urgent') { 🚨 জরুরি কেসসমূহ }
-                @else if (activeTab === 'new') { 📋 নতুন কেসসমূহ }
-                @else if (activeTab === 'approved') { ✓ অনুমোদিত কেসসমূহ }
-                @else if (activeTab === 'reassign_slot') { 📅 স্লট বরাদ্দ কেসসমূহ }
-                @else { 📁 সকল সক্রিয় কেস }
+                @if (activeTab === 'urgent') { 🚨 জরুরি কেসসমূহ · Urgent Cases }
+                @else if (activeTab === 'new') { 📋 নতুন কেসসমূহ · New Intakes }
+                @else if (activeTab === 'approved') { ✓ অনুমোদিত কেসসমূহ · Approved Petitions }
+                @else if (activeTab === 'reassign_slot') { 📅 স্লট বরাদ্দ কেসসমূহ · Clinic Scheduled }
+                @else { 📁 সকল সক্রিয় কেস · All Active Dossiers }
               </span>
             </div>
           </div>
@@ -294,13 +295,13 @@
             <table class="para-custom-table">
               <thead>
                 <tr>
-                  <th style="width: 140px;">কেস আইডি</th>
-                  <th>নাগরিক ও ঘটনা</th>
-                  <th style="width: 130px;">অগ্রাধিকার</th>
-                  <th style="width: 140px;">স্ট্যাটাস</th>
-                  <th style="width: 160px;">অডিট প্রস্তুতি</th>
-                  <th style="width: 140px;">জেলা / স্লট</th>
-                  <th style="width: 190px; text-align: center;">অ্যাকশন</th>
+                  <th style="width: 145px;">কেস আইডি · Case ID</th>
+                  <th>নাগরিক ও ঘটনা · Citizen & Facts</th>
+                  <th style="width: 135px;">অগ্রাধিকার · Priority</th>
+                  <th style="width: 145px;">স্ট্যাটাস · Status</th>
+                  <th style="width: 165px;">অডিট প্রস্তুতি · Audit</th>
+                  <th style="width: 145px;">জেলা / স্লট · Forum/Slot</th>
+                  <th style="width: 200px; text-align: center;">অ্যাকশন · Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -336,13 +337,13 @@
                     <!-- 3. Priority -->
                     <td>
                       @if (c.isUrgent) {
-                        <span class="priority-badge-urgent">
+                        <span class="priority-badge-urgent" title="উচ্চ অগ্রাধিকার নিরাপত্তা ফ্ল্যাগ">
                           <span class="pulse-urgent-dot"></span>
-                          <span>⚡ জরুরি</span>
+                          <span>⚡ জরুরি · Urgent</span>
                         </span>
                       } @else {
                         <span class="priority-badge-normal">
-                          <span>সাধারণ</span>
+                          <span>সাধারণ · Standard</span>
                         </span>
                       }
                     </td>
@@ -351,19 +352,19 @@
                     <td>
                       @if (isCaseApprovedCategory(c)) {
                         <span class="status-badge-approved">
-                          <span>✓ অনুমোদিত</span>
+                          <span>✓ অনুমোদিত · Approved</span>
                         </span>
                       } @else if (isCaseReslotCategory(c)) {
                         <span class="status-badge-reslot">
-                          <span>📅 স্লট বরাদ্দ</span>
+                          <span>📅 নির্ধারিত · Scheduled</span>
                         </span>
                       } @else if (c.isUrgent) {
                         <span class="status-badge-urgent">
-                          <span>🚨 জরুরি নিরীক্ষা</span>
+                          <span>🚨 জরুরি · Urgent</span>
                         </span>
                       } @else {
                         <span class="status-badge-new">
-                          <span>📋 নতুন নথি</span>
+                          <span>📋 নতুন · New</span>
                         </span>
                       }
                     </td>
@@ -398,18 +399,18 @@
                           type="button"
                           class="btn-table-action btn-table-view"
                           (click)="viewCase(c)"
-                          title="কেসের বিস্তারিত বিবরণ ও অডিট দেখুন"
+                          title="কেসের বিস্তারিত বিবরণ ও অডিট দেখুন | View Details"
                         >
-                          <span>👁️ দেখুন</span>
+                          <span>👁️ দেখুন · View</span>
                         </button>
 
                         <button
                           type="button"
                           class="btn-table-action btn-table-edit"
                           (click)="editCase(c)"
-                          title="কেসের তথ্য সম্পাদনা মোডে খুলুন"
+                          title="কেসের তথ্য সম্পাদনা মোডে খুলুন | Edit Case"
                         >
-                          <span>✏️ সম্পাদনা</span>
+                          <span>✏️ সম্পাদনা · Edit</span>
                         </button>
                       </div>
                     </td>
@@ -421,7 +422,7 @@
                     <td colspan="7">
                       <div class="table-empty-state">
                         <span class="empty-icon">📭</span>
-                        <h4>কোনো কেস পাওয়া যায়নি</h4>
+                        <h4>কোনো কেস পাওয়া যায়নি · No Cases Found</h4>
                         <p>আপনার অনুসন্ধান বা ফিল্টারের সাথে মিলে এমন কোনো কেস এই মুহূর্তে নেই।</p>
                         @if (searchQuery || categoryFilter !== 'ALL' || activeTab !== 'all') {
                           <button
@@ -429,7 +430,7 @@
                             class="btn-reset-filter"
                             (click)="searchQuery = ''; categoryFilter = 'ALL'; setTab('all')"
                           >
-                            ফিল্টার রিসেট করুন
+                            ফিল্টার রিসেট করুন · Reset Filters
                           </button>
                         }
                       </div>
@@ -443,10 +444,10 @@
           <!-- Table Footer -->
           <div class="para-table-footer">
             <span class="footer-count-text">
-              মোট <strong>{{ formatBengaliNumber(displayedCases.length) }}</strong> টি কেস তালিকাভুক্ত রয়েছে
+              মোট <strong>{{ formatBengaliNumber(displayedCases.length) }}</strong> টি কেস তালিকাভুক্ত রয়েছে · Total Cases Listed
             </span>
             <span class="footer-legal-notice">
-              ⚖️ জাতীয় আইনগত সহায়তা প্রদান সংস্থা (NLASO) ও বাংলাদেশ বার কাউন্সিল সমর্থিত
+              ⚖️ জাতীয় আইনগত সহায়তা প্রদান সংস্থা (NLASO) ও বাংলাদেশ বার কাউন্সিল সমর্থিত · Legal Aid & Bar Council Verified
             </span>
           </div>
         </div>
@@ -463,10 +464,10 @@
               type="button"
               class="btn-back-to-table"
               (click)="backToTable()"
-              title="মামলা ও আবেদন রেজিস্ট্রি তালিকায় ফিরে যান"
+              title="মামলা ও আবেদন রেজিস্ট্রি তালিকায় ফিরে যান | Back to Registry"
             >
               <span>←</span>
-              <span>কেস তালিকায় ফিরে যান (Back to Table)</span>
+              <span>কেস তালিকায় ফিরে যান · Back to Cases</span>
             </button>
 
             <div class="case-workspace-title-row">
@@ -481,18 +482,18 @@
               @if (selectedCase.isUrgent) {
                 <span class="priority-badge-urgent">
                   <span class="pulse-urgent-dot"></span>
-                  <span>জরুরি কেস</span>
+                  <span>জরুরি কেস · Urgent</span>
                 </span>
               }
             </div>
 
             <div class="case-workspace-meta-row">
-              <span class="meta-item">📍 জেলা: <strong>{{ selectedCase.district || 'ঢাকা' }}</strong></span>
+              <span class="meta-item">📍 জেলা / District: <strong>{{ selectedCase.district || 'ঢাকা' }}</strong></span>
               <span class="meta-sep">•</span>
-              <span class="meta-item">📅 নথিভুক্তির তারিখ: <strong>{{ todayDateString }}</strong></span>
+              <span class="meta-item">📅 নথিভুক্তির তারিখ / Date: <strong>{{ todayDateString }}</strong></span>
               @if (selectedCase.scheduledSlot) {
                 <span class="meta-sep">•</span>
-                <span class="meta-item text-indigo-700">🕒 নির্ধারিত অ্যাপয়েন্টমেন্ট: <strong>{{ formatBengaliDate(selectedCase.scheduledSlot.date) }} ({{ selectedCase.scheduledSlot.time }})</strong></span>
+                <span class="meta-item text-indigo-700">🕒 নির্ধারিত অ্যাপয়েন্টমেন্ট / Slot: <strong>{{ formatBengaliDate(selectedCase.scheduledSlot.date) }} ({{ selectedCase.scheduledSlot.time }})</strong></span>
               }
             </div>
           </div>
@@ -505,26 +506,26 @@
                 type="button"
                 class="btn-ws-edit"
                 (click)="toggleEditSummary()"
-                title="কেসের তথ্য সম্পাদনা মোড চালু করুন"
+                title="কেসের তথ্য সম্পাদনা মোড চালু করুন | Edit Case Facts"
               >
-                <span>✏️ তথ্য সম্পাদনা করুন</span>
+                <span>✏️ তথ্য সম্পাদনা · Edit</span>
               </button>
             } @else {
               <div class="edit-mode-active-group">
-                <span class="edit-mode-active-pill">✏️ সম্পাদনা মোড চালু</span>
+                <span class="edit-mode-active-pill">✏️ সম্পাদনা মোড · Editing</span>
                 <button
                   type="button"
                   class="btn-ws-cancel"
                   (click)="cancelEdit()"
                 >
-                  ✕ বাতিল
+                  ✕ বাতিল · Cancel
                 </button>
                 <button
                   type="button"
                   class="btn-ws-save"
                   (click)="saveSummaryEdits()"
                 >
-                  ✓ তথ্য সংরক্ষণ করুন
+                  ✓ সংরক্ষণ করুন · Save
                 </button>
               </div>
             }
@@ -534,9 +535,9 @@
                 type="button"
                 class="btn-ws-approve"
                 (click)="approveCase()"
-                title="কেসটি চূড়ান্ত অনুমোদন করুন"
+                title="কেসটি চূড়ান্ত অনুমোদন করুন | Approve Case"
               >
-                <span>✓ অনুমোদন করুন</span>
+                <span>✓ অনুমোদন করুন · Approve</span>
               </button>
             } @else {
               <button
@@ -544,7 +545,7 @@
                 class="btn-ws-approved-tag"
                 disabled
               >
-                <span>✓ অনুমোদিত কেস</span>
+                <span>✓ অনুমোদিত · Approved</span>
               </button>
             }
 
@@ -552,9 +553,9 @@
               type="button"
               class="btn-ws-reslot"
               (click)="openReslotModal()"
-              title="সময়সূচী পুনঃনির্ধারণ করুন"
+              title="সময়সূচী পুনঃনির্ধারণ করুন | Reslot Appointment"
             >
-              <span>📅 স্লট পুনর্নির্ধারণ</span>
+              <span>📅 স্লট পুনর্নির্ধারণ · Reslot</span>
             </button>
 
             @if (isCaseApproved()) {
@@ -564,7 +565,7 @@
                 (click)="downloadOfficialBackendPdf()"
                 [disabled]="isDownloadingPdf"
               >
-                <span>{{ isDownloadingPdf ? '⏳ PDF তৈরি হচ্ছে...' : '📥 অফিসিয়াল PDF ডাউনলোড' }}</span>
+                <span>{{ isDownloadingPdf ? '⏳ PDF তৈরি হচ্ছে...' : '📥 অফিসিয়াল PDF · Download PDF' }}</span>
               </button>
             }
           </div>
@@ -578,30 +579,30 @@
             class="detail-tab-btn"
             [class.active]="activeDetailTab === 'summary'"
           >
-            <span>📋 কেস সারসংক্ষেপ, তথ্য ও ড্রাফট (Facts & Draft)</span>
+            <span>📋 কেস সারসংক্ষেপ, তথ্য ও ড্রাফট · Case Facts & Draft</span>
           </button>
 
-            <button
-              type="button"
-              (click)="activeDetailTab = 'checklist'"
-              class="detail-tab-btn"
-              [class.active]="activeDetailTab === 'checklist'"
+          <button
+            type="button"
+            (click)="activeDetailTab = 'checklist'"
+            class="detail-tab-btn"
+            [class.active]="activeDetailTab === 'checklist'"
+          >
+            <span>⚖️ আইনি যাচাই ও অডিট চেকলিস্ট · Statutory Audit</span>
+            <span
+              class="score-pill-header"
+              [class.high-score]="getChecklistScore(selectedCase) >= 80"
+              [class.low-score]="getChecklistScore(selectedCase) < 80"
             >
-              <span>⚖️ আইনি যাচাই ও অডিট চেকলিস্ট</span>
-              <span
-                class="score-pill-header"
-                [class.high-score]="getChecklistScore(selectedCase) >= 80"
-                [class.low-score]="getChecklistScore(selectedCase) < 80"
-              >
-                {{
-                  formatBengaliNumber(getChecklistCompletedCount(selectedCase))
-                }}/{{
-                  formatBengaliNumber(getLegalChecklist(selectedCase).length)
-                }}
-                ({{ formatBengaliNumber(getChecklistScore(selectedCase)) }}%)
-              </span>
-            </button>
-          </div>
+              {{
+                formatBengaliNumber(getChecklistCompletedCount(selectedCase))
+              }}/{{
+                formatBengaliNumber(getLegalChecklist(selectedCase).length)
+              }}
+              ({{ formatBengaliNumber(getChecklistScore(selectedCase)) }}%)
+            </span>
+          </button>
+        </div>
 
           @if (activeDetailTab === "checklist") {
             <div class="checklist-pane">
@@ -610,14 +611,15 @@
                 <div class="audit-hero-top">
                   <div>
                     <span class="audit-badge-gov">
-                      বাংলাদেশ জুডিশিয়াল প্র্যাকটিস স্ট্যান্ডার্ড
+                      বাংলাদেশ জুডিশিয়াল প্র্যাকটিস স্ট্যান্ডার্ড · Judicial Practice Standard
                     </span>
                     <h4 class="audit-hero-title">
-                      <span>আইনি গ্রহণযোগ্যতা ও নথিপত্র অডিট চেকলিস্ট</span>
+                      <span>আইনি গ্রহণযোগ্যতা ও নথিপত্র অডিট চেকলিস্ট · Statutory Audit</span>
                       <span class="case-ref-chip">({{ selectedCase.reference }})</span>
                     </h4>
                     <p class="audit-hero-desc">
                       বিজ্ঞ আইনজীবী / প্যারালেগাল হিসেবে মামলার আঞ্চলিক এখতিয়ার, তামাদি মেয়াদ, নথিপত্র ও আইনি ধারা যাচাই করুন।
+                      <span class="block mt-0.5 text-xs text-slate-500 font-normal">Audit territorial jurisdiction, limitation period, documentary annexures, and statutory grounds.</span>
                     </p>
                   </div>
 
@@ -627,7 +629,7 @@
                       (click)="markAllChecklistItems(selectedCase)"
                       class="btn-mark-all"
                     >
-                      <span>✓ সব যাচাই সম্পন্ন করুন</span>
+                      <span>✓ সব যাচাই সম্পন্ন করুন · Mark All Verified</span>
                     </button>
                   </div>
                 </div>
@@ -636,12 +638,12 @@
                 <div class="progress-track-wrapper">
                   <div class="progress-label-row">
                     <span class="progress-score-text">
-                      <strong>আইনি প্রস্তুতি স্কোর (Legal Readiness Score):</strong>
+                      <strong>আইনি প্রস্তুতি স্কোর · Readiness Score:</strong>
                       <span class="progress-percent">{{ formatBengaliNumber(getChecklistScore(selectedCase)) }}%</span>
                     </span>
                     <span class="progress-count-text">
-                      {{ formatBengaliNumber(getChecklistCompletedCount(selectedCase)) }}টি সম্পন্ন / মোট
-                      {{ formatBengaliNumber(getLegalChecklist(selectedCase).length) }}টি দফা
+                      {{ formatBengaliNumber(getChecklistCompletedCount(selectedCase)) }} সম্পন্ন / মোট
+                      {{ formatBengaliNumber(getLegalChecklist(selectedCase).length) }} দফা · Completed
                     </span>
                   </div>
                   <div class="progress-bar-track">
@@ -657,8 +659,8 @@
               <div class="prototype-notice-card">
                 <span class="prototype-notice-icon">📌</span>
                 <div class="prototype-notice-content">
-                  <strong>প্রোটোটাইপ চেকলিস্ট ও রিয়েল ডাটা ভেরিফিকেশন ক্লেইম:</strong>
-                  এই চেকলিস্টটি সহকারী জজ আদালত ও লিগ্যাল এইড ফাইলিং স্ট্যান্ডার্ড অনুযায়ী প্রদর্শিত হচ্ছে। পরবর্তী সংস্করণে <strong>ই-কোর্ট এভিডেন্স ভল্ট (E-Court Vault)</strong>, <strong>ডিজিটাল নোটারি API</strong> এবং <strong>জরুরি সেফটি ট্র্যাকার</strong>-এর সাথে রিয়েল-টাইম ইন্টিগ্রেশন করা হবে।
+                  <strong>আইনি মানদণ্ড ও যাচাইকরণ কাঠামো · Statutory Verification Framework:</strong>
+                  এই চেকলিস্টটি সহকারী জজ আদালত ও লিগ্যাল এইড ফাইলিং স্ট্যান্ডার্ড অনুযায়ী প্রদর্শিত হচ্ছে। পরবর্তী সংস্করণে ই-কোর্ট এভিডেন্স ভল্ট ও ডিজিটাল স্বাক্ষরের সাথে সরাসরি সমন্বিত থাকবে।
                 </div>
               </div>
 
@@ -682,7 +684,7 @@
                         <div class="check-item-title-row">
                           <span class="check-item-title">{{ item.title }}</span>
                           @if (item.isMandatory) {
-                            <span class="mandatory-pill">আবশ্যক</span>
+                            <span class="mandatory-pill">আবশ্যক · Mandatory</span>
                           }
                         </div>
 
@@ -696,10 +698,10 @@
                       <div class="check-item-status-pill" [class.verified]="item.isChecked" [class.pending]="!item.isChecked">
                         @if (item.isChecked) {
                           <span class="status-dot-verified"></span>
-                          <span>বিজ্ঞ আইনজীবী কর্তৃক নিরীক্ষিত ও নিশ্চিতকৃত</span>
+                          <span>বিজ্ঞ আইনজীবী কর্তৃক নিরীক্ষিত ও নিশ্চিতকৃত · Verified by Advocate</span>
                         } @else {
                           <span class="status-dot-pending"></span>
-                          <span>যাচাই বাকি / নথিপত্র পর্যালোচনা প্রয়োজন</span>
+                          <span>যাচাই বাকি / পর্যালোচনা প্রয়োজন · Verification Pending</span>
                         }
                       </div>
                     </div>
@@ -710,17 +712,17 @@
               <!-- Advocate's Statutory Opinion / Notes Box -->
               <div class="advocate-notes-box">
                 <label class="advocate-notes-label">
-                  <span>📝 বিজ্ঞ আইনজীবীর পর্যবেক্ষণ ও আইনি মতামত (Advocate's Legal Opinion):</span>
+                  <span>📝 বিজ্ঞ আইনজীবীর পর্যবেক্ষণ ও আইনি মতামত · Advocate's Legal Opinion:</span>
                 </label>
                 <textarea
                   [(ngModel)]="selectedCase.advocateNotes"
                   rows="3"
                   class="advocate-notes-textarea"
-                  placeholder="মামলার গ্রহণযোগ্যতা, তামাদি বিষয় বা অতিরিক্ত নথিপত্র সম্পর্কিত বিশেষ নোট এখানে লিখুন..."
+                  placeholder="মামলার গ্রহণযোগ্যতা, তামাদি বিষয় বা অতিরিক্ত নথিপত্র সম্পর্কিত বিশেষ নোট এখানে লিখুন... / Enter statutory remarks or filing notes..."
                 ></textarea>
                 <div class="advocate-notes-footer">
-                  <span>এই মতামতটি খসড়া দরখাস্তের অফিসিয়াল কভার নোটে সংরক্ষিত থাকবে।</span>
-                  <span class="lawyer-sign-tag">আইনজীবী স্বাক্ষর প্রস্তুত</span>
+                  <span>এই মতামতটি খসড়া দরখাস্তের অফিসিয়াল কভার নোটে সংরক্ষিত থাকবে · Attached to Official Case File</span>
+                  <span class="lawyer-sign-tag">আইনজীবী স্বাক্ষর প্রস্তুত · Ready for Signature</span>
                 </div>
               </div>
             </div>
@@ -732,7 +734,7 @@
               <!-- Navy Header Bar -->
               <div class="summary-header-bar">
                 {{ selectedCase.templateTitle || selectedCase.categoryDisplay }}
-                · কেস সারসংক্ষেপ · {{ selectedCase.reference }}
+                · কেস সারসংক্ষেপ ও তথ্য · Case Summary & Dossier · {{ selectedCase.reference }}
               </div>
 
               <!-- Structured Case Summary Table -->
@@ -841,11 +843,10 @@
                     <div>
                       <div class="flex items-center gap-2 flex-wrap">
                         <h4 class="para-qb-title">
-                          প্রশ্নব্যাংক অনুযায়ী ক্লায়েন্টের প্রশ্নোত্তর ও
-                          জবানবন্দি
+                          প্রশ্নব্যাংক অনুযায়ী ক্লায়েন্টের প্রশ্নোত্তর ও জবানবন্দি · Question Bank Responses
                         </h4>
                         <span class="badge-category-pill"
-                          >বিষয়: {{ selectedCase.categoryDisplay }}</span
+                          >বিষয় · Area: {{ selectedCase.categoryDisplay }}</span
                         >
                       </div>
                       <div class="para-qb-sub">
@@ -853,7 +854,7 @@
                           ✓
                           {{
                             formatBengaliNumber(getAnsweredCount(selectedCase))
-                          }}টি উত্তর প্রাপ্ত
+                          }} প্রাপ্ত · Answered
                         </span>
                         <span>·</span>
                         <span class="badge-counter-unanswered">
@@ -862,7 +863,7 @@
                             formatBengaliNumber(
                               getUnansweredCount(selectedCase)
                             )
-                          }}টি বাকি
+                          }} বাকি · Pending
                         </span>
                         <span
                           >(মোট
@@ -870,7 +871,7 @@
                             formatBengaliNumber(
                               getQuestionReplies(selectedCase).length
                             )
-                          }}টি প্রশ্ন)</span
+                          }} প্রশ্ন · Total)</span
                         >
                       </div>
                     </div>
@@ -893,7 +894,7 @@
                           [class.active]="qrFilterMode === 'all'"
                           (click)="setQrFilter('all')"
                         >
-                          সব প্রশ্ন ({{
+                          সব প্রশ্ন · All ({{
                             formatBengaliNumber(
                               getQuestionReplies(selectedCase).length
                             )
@@ -905,7 +906,7 @@
                           [class.active]="qrFilterMode === 'answered'"
                           (click)="setQrFilter('answered')"
                         >
-                          উত্তর প্রাপ্ত ({{
+                          উত্তর প্রাপ্ত · Answered ({{
                             formatBengaliNumber(getAnsweredCount(selectedCase))
                           }})
                         </button>
@@ -920,8 +921,8 @@
                         (click)="togglePlayAllReplies()"
                         [title]="
                           isPlayingAllReplies
-                            ? 'ধারাবাহিক প্লেব্যাক বন্ধ করুন'
-                            : 'সব প্রশ্ন ও উত্তর ধারাবাহিকভাবে বাংলায় শুনুন'
+                            ? 'ধারাবাহিক প্লেব্যাক বন্ধ করুন | Stop Audio'
+                            : 'সব প্রশ্ন ও উত্তর ধারাবাহিকভাবে বাংলায় শুনুন | Listen All'
                         "
                       >
                         <span class="playall-icon">{{
@@ -929,8 +930,8 @@
                         }}</span>
                         <span>{{
                           isPlayingAllReplies
-                            ? "প্লেব্যাক থামান"
-                            : "সব উত্তর শুনুন"
+                            ? "থামান · Stop"
+                            : "সব শুনুন · Listen All"
                         }}</span>
                       </button>
                     }
@@ -941,11 +942,11 @@
                       class="para-qb-toggle-btn"
                       (click)="toggleQuestionReplies()"
                       [title]="
-                        isQuestionRepliesOpen ? 'লুকান' : 'বিস্তারিত দেখুন'
+                        isQuestionRepliesOpen ? 'লুকান | Hide' : 'বিস্তারিত দেখুন | Expand'
                       "
                     >
                       <span>{{
-                        isQuestionRepliesOpen ? "লুকান" : "দেখুন"
+                        isQuestionRepliesOpen ? "সংকুচিত · Hide" : "দেখুন · Expand"
                       }}</span>
                       <span
                         class="toggle-arrow"
@@ -1114,9 +1115,9 @@
                     type="button"
                     class="btn-edit-summary"
                     (click)="toggleEditSummary()"
-                    title="তথ্য সম্পাদনা করুন"
+                    title="তথ্য সম্পাদনা করুন | Edit Summary"
                   >
-                    <span>✎ সারসংক্ষেপ সম্পাদনা</span>
+                    <span>✎ সারসংক্ষেপ সম্পাদনা · Edit Summary</span>
                   </button>
 
                   <!-- 2. Separate Approve Case Button -->
@@ -1125,9 +1126,9 @@
                       type="button"
                       class="btn-approve-pdf bg-[#102a43] hover:bg-[#091a2a] text-white font-semibold flex items-center gap-1.5 shadow-sm"
                       (click)="approveCase()"
-                      title="কেসটি চূড়ান্ত অনুমোদন করুন"
+                      title="কেসটি চূড়ান্ত অনুমোদন করুন | Approve Case"
                     >
-                      <span>✓ অনুমোদন করুন</span>
+                      <span>✓ অনুমোদন করুন · Approve</span>
                     </button>
                   } @else {
                     <button
@@ -1136,7 +1137,7 @@
                       disabled
                       title="কেসটি ইতিমধ্যে অনুমোদিত"
                     >
-                      <span>✓ অনুমোদিত (Approved)</span>
+                      <span>✓ অনুমোদিত · Approved</span>
                     </button>
                   }
 
@@ -1147,12 +1148,12 @@
                       class="btn-approve-pdf"
                       (click)="downloadOfficialBackendPdf()"
                       [disabled]="isDownloadingPdf"
-                      title="অফিসিয়াল আইনি আবেদন PDF ডাউনলোড করুন"
+                      title="অফিসিয়াল আইনি আবেদন PDF ডাউনলোড করুন | Download Petition PDF"
                     >
                       <span>{{
                         isDownloadingPdf
                           ? "⏳ PDF তৈরি হচ্ছে..."
-                          : "📥 PDF ডাউনলোড"
+                          : "📥 PDF ডাউনলোড · Download PDF"
                       }}</span>
                     </button>
                   }
@@ -1162,9 +1163,9 @@
                     type="button"
                     class="btn-reassign-slot"
                     (click)="openReslotModal()"
-                    title="সময়সূচী পুনঃনির্ধারণ করুন"
+                    title="সময়সূচী পুনঃনির্ধারণ করুন | Reassign Slot"
                   >
-                    <span>Reassign Slot</span>
+                    <span>📅 স্লট পুনর্নির্ধারণ · Reassign Slot</span>
                   </button>
                 } @else {
                   <!-- Save Changes / Cancel Edit Actions -->
@@ -1173,7 +1174,7 @@
                     class="btn-reassign-slot"
                     (click)="cancelEdit()"
                   >
-                    <span>✕ বাতিল (Cancel)</span>
+                    <span>✕ বাতিল · Cancel</span>
                   </button>
 
                   <button
@@ -1181,7 +1182,7 @@
                     class="btn-approve-pdf !bg-emerald-700 hover:!bg-emerald-800"
                     (click)="saveSummaryEdits()"
                   >
-                    <span>✓ সারসংক্ষেপ সংরক্ষণ করুন (Save Summary)</span>
+                    <span>✓ সংরক্ষণ করুন · Save Summary</span>
                   </button>
                 }
               </div>
@@ -1198,7 +1199,7 @@
       <div class="modal-backdrop" (click)="closeReslotModal()">
         <div class="modal-card" (click)="$event.stopPropagation()">
           <div class="modal-header">
-            <h3>সময়সূচী পুনঃনির্ধারণ (Reassign Slot)</h3>
+            <h3>সময়সূচী পুনঃনির্ধারণ · Reassign Clinic Slot</h3>
             <button
               type="button"
               class="modal-close-btn"
@@ -1211,7 +1212,7 @@
           <div class="modal-body">
             <!-- Auto-populated Case ID -->
             <div class="form-group">
-              <label class="form-label">কেস আইডি (Case ID)</label>
+              <label class="form-label">কেস আইডি · Case Reference ID</label>
               <input
                 type="text"
                 class="form-input bg-[#F6F3EC] font-bold text-[#005A44] cursor-not-allowed"
@@ -1222,7 +1223,7 @@
 
             <!-- Date Picker -->
             <div class="form-group">
-              <label class="form-label">তারিখ নির্বাচন করুন (Date)</label>
+              <label class="form-label">তারিখ নির্বাচন করুন · Consultation Date</label>
               <input
                 type="date"
                 class="form-input cursor-pointer"
@@ -1232,7 +1233,7 @@
 
             <!-- Time Picker -->
             <div class="form-group">
-              <label class="form-label">সময় নির্ধারণ করুন (Time Slot)</label>
+              <label class="form-label">সময় নির্ধারণ করুন · Time Slot</label>
               <input
                 type="time"
                 class="form-input cursor-pointer"
@@ -1243,32 +1244,32 @@
             <!-- Assigned Paralegal / Panel Lawyer -->
             <div class="form-group">
               <label class="form-label"
-                >দায়িত্বপ্রাপ্ত কর্মকর্তা / আইনজীবী</label
+                >দায়িত্বপ্রাপ্ত কর্মকর্তা বা প্যানেল আইনজীবী · Assigned Advocate</label
               >
               <select class="form-input" [(ngModel)]="reslotCounselor">
                 <option value="এডভোকেট সুলতানা কামাল (প্যানেল আইনজীবী)">
-                  এডভোকেট সুলতানা কামাল (প্যানেল আইনজীবী)
+                  এডভোকেট সুলতানা কামাল (প্যানেল আইনজীবী) · Adv. Sultana Kamal
                 </option>
                 <option value="এডভোকেট রফিকুল ইসলাম (পারিবারিক আদালত)">
-                  এডভোকেট রফিকুল ইসলাম (পারিবারিক আদালত)
+                  এডভোকেট রফিকুল ইসলাম (পারিবারিক আদালত) · Adv. Rafiqul Islam
                 </option>
                 <option value="প্যারালেগাল হেল্পডেস্ক - ১ (উত্তরা অফিস)">
-                  প্যারালেগাল হেল্পডেস্ক - ১ (উত্তরা অফিস)
+                  প্যারালেগাল হেল্পডেস্ক - ১ (উত্তরা অফিস) · Paralegal Helpdesk 1
                 </option>
                 <option value="জাতীয় লিগ্যাল এইড অফিসার (ঢাকা)">
-                  জাতীয় লিগ্যাল এইড অফিসার (ঢাকা)
+                  জাতীয় লিগ্যাল এইড অফিসার (ঢাকা) · NLASO Legal Aid Officer
                 </option>
               </select>
             </div>
 
             <!-- Consultation Notes -->
             <div class="form-group">
-              <label class="form-label">পরামর্শের বিশেষ নোট (Notes)</label>
+              <label class="form-label">পরামর্শের বিশেষ নোট · Consultation Notes</label>
               <textarea
                 class="form-input"
                 rows="2"
                 [(ngModel)]="reslotNotes"
-                placeholder="বিশেষ নির্দেশনা বা শুনানির নোট..."
+                placeholder="বিশেষ নির্দেশনা বা শুনানির নোট... / Enter special notes for clinic appointment..."
               ></textarea>
             </div>
           </div>
@@ -1279,10 +1280,10 @@
               class="btn-reassign-slot"
               (click)="closeReslotModal()"
             >
-              বাতিল করুন
+              বাতিল করুন · Cancel
             </button>
             <button type="button" class="btn-approve-pdf" (click)="bookSlot()">
-              বুক করুন
+              বুক করুন · Confirm Slot
             </button>
           </div>
         </div>
