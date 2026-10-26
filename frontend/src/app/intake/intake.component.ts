@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from '../core/api.service';
 import { SpeechService } from '../core/speech.service';
 import { SafetyEscalationService } from '../core/safety-escalation.service';
+import { LanguageService } from '../core/language.service';
 import {
   ExtractedLegalData,
   ChatResponseDto,
@@ -31,6 +32,7 @@ export interface AnswerRecord {
   styles: ``
 })
 export class IntakeComponent implements OnInit, OnDestroy {
+  public langService = inject(LanguageService);
   readonly safetyService = inject(SafetyEscalationService);
   private api = inject(ApiService);
   public speechService = inject(SpeechService);

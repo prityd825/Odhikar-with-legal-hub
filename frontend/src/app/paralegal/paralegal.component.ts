@@ -36,6 +36,8 @@ export {
   DEFAULT_QUESTION_BANK
 };
 
+import { LanguageService } from '../core/language.service';
+
 @Component({
   selector: 'app-paralegal',
   standalone: true,
@@ -44,6 +46,7 @@ export {
   styleUrls: ['./paralegal.component.css']
 })
 export class ParalegalComponent implements OnInit {
+  public langService = inject(LanguageService);
   private api = inject(ApiService);
   public speechService = inject(SpeechService);
   private route = inject(ActivatedRoute);

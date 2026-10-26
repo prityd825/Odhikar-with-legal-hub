@@ -20,10 +20,36 @@
         </div>
       </div>
 
-      <a routerLink="/" class="back-home-btn" title="মূল পাতায় ফিরে যান | Back to Home">
-        <span>←</span>
-        <span>মূল পাতায় ফিরে যান · Home</span>
-      </a>
+      <div class="flex items-center gap-3">
+        <!-- Interactive Language Switcher (EN | বাংলা) -->
+        <div class="lang-switch-group">
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'bn'"
+            (click)="langService.setLang('bn')"
+            title="বাংলা ভাষায় দেখুন"
+          >
+            <span class="lang-flag">🇧🇩</span>
+            <span>বাংলা</span>
+          </button>
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'en'"
+            (click)="langService.setLang('en')"
+            title="Switch to English"
+          >
+            <span class="lang-flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+        </div>
+
+        <a routerLink="/" class="back-home-btn" title="মূল পাতায় ফিরে যান | Back to Home">
+          <span>←</span>
+          <span>{{ langService.currentLang() === 'en' ? 'Home' : 'মূল পাতা' }}</span>
+        </a>
+      </div>
     </div>
   </header>
 

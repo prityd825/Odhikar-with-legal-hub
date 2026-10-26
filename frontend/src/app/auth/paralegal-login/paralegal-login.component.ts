@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { DEMO_LEGAL_PROFILES, LegalUserProfile } from '../../core/auth.models';
+import { LanguageService } from '../../core/language.service';
 
 @Component({
   selector: 'app-paralegal-login',
@@ -13,6 +14,7 @@ import { DEMO_LEGAL_PROFILES, LegalUserProfile } from '../../core/auth.models';
   styleUrls: ['./paralegal-login.component.css']
 })
 export class ParalegalLoginComponent {
+  public langService = inject(LanguageService);
   private router = inject(Router);
   private authService = inject(AuthService);
 

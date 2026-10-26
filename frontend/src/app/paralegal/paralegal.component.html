@@ -27,6 +27,30 @@
       </div>
 
       <div class="para-topbar-actions">
+        <!-- Interactive Language Switcher (EN | বাংলা) -->
+        <div class="lang-switch-group">
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'bn'"
+            (click)="langService.setLang('bn')"
+            title="বাংলা ভাষায় রূপান্তর করুন"
+          >
+            <span class="lang-flag">🇧🇩</span>
+            <span>বাংলা</span>
+          </button>
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'en'"
+            (click)="langService.setLang('en')"
+            title="Switch to English interface"
+          >
+            <span class="lang-flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+        </div>
+
         <!-- Profile Badge / Button -->
         <button
           type="button"
@@ -40,12 +64,12 @@
           <div class="para-profile-meta">
             <div class="para-profile-name-row">
               <span class="para-profile-name">{{
-                currentUser.nameBangla
+                langService.currentLang() === 'en' ? currentUser.nameEnglish : currentUser.nameBangla
               }}</span>
-              <span class="para-profile-verified-tag">✓ ভেরিফাইড · Verified</span>
+              <span class="para-profile-verified-tag">✓ {{ langService.currentLang() === 'en' ? 'Verified' : 'ভেরিফাইড' }}</span>
             </div>
             <div class="para-profile-desig">
-              {{ currentUser.designationBangla }}
+              {{ langService.currentLang() === 'en' ? currentUser.designationEnglish : currentUser.designationBangla }}
             </div>
           </div>
           <span class="para-profile-chevron">▼</span>
@@ -53,7 +77,7 @@
 
         <a class="btn-back-home" routerLink="/" (click)="goToHome()" title="মূল পাতায় ফিরে যান | Home">
           <span>←</span>
-          <span>মূল পাতা · Home</span>
+          <span>{{ langService.currentLang() === 'en' ? 'Home' : 'মূল পাতা' }}</span>
         </a>
       </div>
     </header>

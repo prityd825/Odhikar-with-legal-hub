@@ -26,29 +26,59 @@
         </div>
       </div>
 
-      <!-- Quick Nav Links (Bilingual) -->
+      <!-- Quick Nav Links (Bilingual Switchable) -->
       <nav class="nav-links">
         <a routerLink="/intake" class="nav-link">
           <span class="nav-link-dot"></span>
-          <span>নাগরিক সেবা <span class="en-sub">· Intake</span></span>
+          <span>{{ langService.currentLang() === 'en' ? 'Citizen Intake' : 'নাগরিক সেবা' }}</span>
         </a>
         <a routerLink="/paralegal" class="nav-link">
-          <span>প্যারালেগাল ডেক্স <span class="en-sub">· Registry</span></span>
+          <span>{{ langService.currentLang() === 'en' ? 'Paralegal Desk' : 'প্যারালেগাল ডেক্স' }}</span>
         </a>
         <a href="#workflow" class="nav-link">
-          <span>কার্যপদ্ধতি <span class="en-sub">· Workflow</span></span>
+          <span>{{ langService.currentLang() === 'en' ? 'Workflow Pipeline' : 'কার্যপদ্ধতি' }}</span>
         </a>
         <a href="#frameworks" class="nav-link">
-          <span>আইনি কাঠামো <span class="en-sub">· Frameworks</span></span>
+          <span>{{ langService.currentLang() === 'en' ? 'Legal Frameworks' : 'আইনি কাঠামো' }}</span>
         </a>
       </nav>
 
       <!-- Nav Actions -->
       <div class="nav-actions">
+        <!-- Interactive Language Switcher Pill (EN | বাংলা) -->
+        <div class="lang-switch-group">
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'bn'"
+            (click)="langService.setLang('bn')"
+            title="বাংলা ভাষায় দেখুন"
+          >
+            <span class="lang-flag">🇧🇩</span>
+            <span>বাংলা</span>
+          </button>
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'en'"
+            (click)="langService.setLang('en')"
+            title="Switch to English interface"
+          >
+            <span class="lang-flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+        </div>
+
         <a href="tel:16430" class="helpline-pill" title="বিনামূল্যে সরকারি আইনি সহায়তা হেল্পলাইন | Free Legal Aid Helpline">
           <span class="helpline-pulse"></span>
           <span class="helpline-icon">📞</span>
-          <span class="helpline-text">লিগ্যাল এইড: <strong>১৬৪৩০</strong> <span class="en-sub text-[11px] font-normal text-emerald-800">(16430)</span></span>
+          <span class="helpline-text">
+            @if (langService.currentLang() === 'en') {
+              Legal Aid: <strong>16430</strong>
+            } @else {
+              লিগ্যাল এইড: <strong>১৬৪৩০</strong>
+            }
+          </span>
         </a>
 
         <a routerLink="/paralegal/login" class="nav-btn-advocate" title="বিজ্ঞ প্যানেল আইনজীবী ও প্যারালেগাল লগইন | Advocate Login">
@@ -56,7 +86,7 @@
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          <span>আইনজীবী লগইন <span class="en-sub text-slate-300 font-normal">· Login</span></span>
+          <span>{{ langService.currentLang() === 'en' ? 'Advocate Login' : 'আইনজীবী লগইন' }}</span>
         </a>
       </div>
     </div>
@@ -67,39 +97,65 @@
     <section class="hero-section">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        <span class="badge-text">গণপ্রজাতন্ত্রী বাংলাদেশ · জাতীয় লিগ্যাল এইড (NLASO) ও বার কাউন্সিল সমন্বিত | National Legal Aid Initiative</span>
+        <span class="badge-text">
+          @if (langService.currentLang() === 'en') {
+            Govt. of Bangladesh · National Legal Aid (NLASO) & Bar Council Integrated Initiative
+          } @else {
+            গণপ্রজাতন্ত্রী বাংলাদেশ · জাতীয় লিগ্যাল এইড (NLASO) ও বার কাউন্সিল সমন্বিত উদ্যোগ
+          }
+        </span>
       </div>
 
-      <h1 class="hero-title">
-        প্রান্তিক মানুষের কণ্ঠই হোক <br class="hidden sm:inline" />
-        <span class="gradient-text">আইনি ন্যায়বিচারের শক্তি</span>
-      </h1>
+      @if (langService.currentLang() === 'en') {
+        <h1 class="hero-title">
+          Empowering Citizen Voices with <br class="hidden sm:inline" />
+          <span class="gradient-text">The Strength of Justice</span>
+        </h1>
 
-      <p class="hero-subtitle">
-        বাংলা ভয়েস প্রযুক্তি ও কৃত্রিম বুদ্ধিমত্তার মাধ্যমে নিরক্ষর ও সাধারণ নাগরিকদের মৌখিক অভিযোগকে 
-        তাৎক্ষণিক আইনি ধারা বিশ্লেষণপূর্বক আদালত-উপযোগী পিটিশনে রূপান্তর। <br />
-        <span class="en-tagline">Empowering marginalized citizens through AI-assisted vernacular intake, automated legal fact extraction, and court-ready petition drafting.</span>
-      </p>
+        <p class="hero-subtitle">
+          Democratizing access to justice through AI-assisted vernacular voice intake, 
+          automated statutory fact extraction, and court-ready petition drafting for marginalized citizens.
+        </p>
+      } @else {
+        <h1 class="hero-title">
+          প্রান্তিক মানুষের কণ্ঠই হোক <br class="hidden sm:inline" />
+          <span class="gradient-text">আইনি ন্যায়বিচারের শক্তি</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          বাংলা ভয়েস প্রযুক্তি ও কৃত্রিম বুদ্ধিমত্তার মাধ্যমে নিরক্ষর ও সাধারণ নাগরিকদের মৌখিক অভিযোগকে 
+          তাৎক্ষণিক আইনি ধারা বিশ্লেষণপূর্বক আদালত-উপযোগী পিটিশনে রূপান্তর। <br />
+          <span class="en-tagline">Empowering marginalized citizens through AI-assisted vernacular intake, automated legal fact extraction, and court-ready petition drafting.</span>
+        </p>
+      }
 
       <!-- Hero Call To Actions (Bilingual) -->
       <div class="hero-cta-group">
-        <a routerLink="/intake" class="hero-btn-primary" title="নাগরিক আইনি সহায়তা আবেদন শুরু করুন | Start Citizen Legal Intake">
+        <a routerLink="/intake" class="hero-btn-primary" title="Start Citizen Intake">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
             <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
             <line x1="12" y1="19" x2="12" y2="22"></line>
             <line x1="8" y1="22" x2="16" y2="22"></line>
           </svg>
-          <span>সরাসরি বাংলায় আইনি সহায়তা নিন <span class="en-btn-tag font-normal opacity-90">· Start Citizen Intake</span></span>
+          @if (langService.currentLang() === 'en') {
+            <span>Start Citizen Legal Intake</span>
+          } @else {
+            <span>সরাসরি বাংলায় আইনি সহায়তা নিন <span class="en-btn-tag font-normal opacity-90">· Start Citizen Intake</span></span>
+          }
           <span class="btn-arrow">→</span>
         </a>
 
-        <a routerLink="/paralegal" class="hero-btn-secondary" title="প্যারালেগাল ও আইনজীবী কেস ডেক্স | Paralegal & Advocate Desk">
+        <a routerLink="/paralegal" class="hero-btn-secondary" title="Paralegal & Advocate Desk">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
             <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
-          <span>প্যারালেগাল ও আইনজীবী ডেক্স <span class="en-btn-tag font-normal text-slate-500">· Paralegal Desk</span></span>
+          @if (langService.currentLang() === 'en') {
+            <span>Paralegal & Advocate Desk</span>
+          } @else {
+            <span>প্যারালেগাল ও আইনজীবী ডেক্স <span class="en-btn-tag font-normal text-slate-500">· Paralegal Desk</span></span>
+          }
           <span class="btn-arrow">→</span>
         </a>
       </div>
@@ -107,23 +163,23 @@
       <!-- Trust Metrics Bar (Bilingual) -->
       <div class="trust-metrics-strip">
         <div class="metric-item">
-          <span class="metric-value">১০০% <span class="metric-en">/ 100%</span></span>
-          <span class="metric-label">বিনামূল্যে সেবা · Free Legal Aid</span>
+          <span class="metric-value">100%</span>
+          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Free Legal Aid' : 'বিনামূল্যে সেবা · Free Legal Aid' }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
-          <span class="metric-value">৬+ <span class="metric-en">/ 6+</span></span>
-          <span class="metric-label">আইনি বিষয় · Statutory Areas</span>
+          <span class="metric-value">6+</span>
+          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Statutory Areas' : 'আইনি বিষয় · Statutory Areas' }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
-          <span class="metric-value">১-ক্লিক <span class="metric-en">/ 1-Click</span></span>
-          <span class="metric-label">আদালত PDF · Formal Petition</span>
+          <span class="metric-value">1-Click</span>
+          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Formal Court Petition' : 'আদালত PDF · Formal Petition' }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
-          <span class="metric-value">২৪/৭ <span class="metric-en">/ 24/7</span></span>
-          <span class="metric-label">জরুরি নিরাপত্তা · Safety Triage</span>
+          <span class="metric-value">24/7</span>
+          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Emergency Triage' : 'জরুরি নিরাপত্তা · Safety Triage' }}</span>
         </div>
       </div>
     </section>
