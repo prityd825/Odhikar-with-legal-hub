@@ -30,29 +30,39 @@
       <nav class="nav-links">
         <a routerLink="/intake" class="nav-link">
           <span class="nav-link-dot"></span>
-          <span>{{ langService.currentLang() === 'en' ? 'Citizen Intake' : 'নাগরিক সেবা' }}</span>
+          <span>{{ langService.t('নাগরিক সেবা', 'Citizen Intake') }}</span>
         </a>
         <a routerLink="/paralegal" class="nav-link">
-          <span>{{ langService.currentLang() === 'en' ? 'Paralegal Desk' : 'প্যারালেগাল ডেক্স' }}</span>
+          <span>{{ langService.t('প্যারালেগাল ডেক্স', 'Paralegal Desk') }}</span>
         </a>
         <a href="#workflow" class="nav-link">
-          <span>{{ langService.currentLang() === 'en' ? 'Workflow Pipeline' : 'কার্যপদ্ধতি' }}</span>
+          <span>{{ langService.t('কার্যপদ্ধতি', 'Workflow') }}</span>
         </a>
         <a href="#frameworks" class="nav-link">
-          <span>{{ langService.currentLang() === 'en' ? 'Legal Frameworks' : 'আইনি কাঠামো' }}</span>
+          <span>{{ langService.t('আইনি কাঠামো', 'Legal Frameworks') }}</span>
         </a>
       </nav>
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <!-- Interactive Language Switcher Pill (EN | বাংলা) -->
+        <!-- Interactive Language Switcher Pill (Both | বাংলা | English) -->
         <div class="lang-switch-group">
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'both'"
+            (click)="langService.setLang('both')"
+            title="উভয় ভাষায় দেখুন · View Both Bangla & English"
+          >
+            <span class="lang-flag">🌐</span>
+            <span>উভয় · Both</span>
+          </button>
           <button
             type="button"
             class="lang-btn"
             [class.active]="langService.currentLang() === 'bn'"
             (click)="langService.setLang('bn')"
-            title="বাংলা ভাষায় দেখুন"
+            title="শুধুমাত্র বাংলায় দেখুন"
           >
             <span class="lang-flag">🇧🇩</span>
             <span>বাংলা</span>
@@ -75,8 +85,10 @@
           <span class="helpline-text">
             @if (langService.currentLang() === 'en') {
               Legal Aid: <strong>16430</strong>
-            } @else {
+            } @else if (langService.currentLang() === 'bn') {
               লিগ্যাল এইড: <strong>১৬৪৩০</strong>
+            } @else {
+              লিগ্যাল এইড · Legal Aid: <strong>16430</strong>
             }
           </span>
         </a>
@@ -86,7 +98,7 @@
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          <span>{{ langService.currentLang() === 'en' ? 'Advocate Login' : 'আইনজীবী লগইন' }}</span>
+          <span>{{ langService.t('আইনজীবী লগইন', 'Advocate Login') }}</span>
         </a>
       </div>
     </div>
@@ -100,8 +112,10 @@
         <span class="badge-text">
           @if (langService.currentLang() === 'en') {
             Govt. of Bangladesh · National Legal Aid (NLASO) & Bar Council Integrated Initiative
-          } @else {
+          } @else if (langService.currentLang() === 'bn') {
             গণপ্রজাতন্ত্রী বাংলাদেশ · জাতীয় লিগ্যাল এইড (NLASO) ও বার কাউন্সিল সমন্বিত উদ্যোগ
+          } @else {
+            গণপ্রজাতন্ত্রী বাংলাদেশ · Govt. of Bangladesh (NLASO & Bar Council Initiative)
           }
         </span>
       </div>
@@ -116,7 +130,7 @@
           Democratizing access to justice through AI-assisted vernacular voice intake, 
           automated statutory fact extraction, and court-ready petition drafting for marginalized citizens.
         </p>
-      } @else {
+      } @else if (langService.currentLang() === 'bn') {
         <h1 class="hero-title">
           প্রান্তিক মানুষের কণ্ঠই হোক <br class="hidden sm:inline" />
           <span class="gradient-text">আইনি ন্যায়বিচারের শক্তি</span>
@@ -124,8 +138,22 @@
 
         <p class="hero-subtitle">
           বাংলা ভয়েস প্রযুক্তি ও কৃত্রিম বুদ্ধিমত্তার মাধ্যমে নিরক্ষর ও সাধারণ নাগরিকদের মৌখিক অভিযোগকে 
+          তাৎক্ষণিক আইনি ধারা বিশ্লেষণপূর্বক আদালত-উপযোগী পিটিশনে রূপান্তর।
+        </p>
+      } @else {
+        <!-- BOTH Language Mode: Rich Side-by-Side Dual Display -->
+        <h1 class="hero-title">
+          প্রান্তিক মানুষের কণ্ঠই হোক <br class="hidden sm:inline" />
+          <span class="gradient-text">আইনি ন্যায়বিচারের শক্তি</span>
+          <span class="block mt-2 text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-100 tracking-tight font-sans">
+            Empowering Citizen Voices with <span class="text-emerald-400">The Strength of Justice</span>
+          </span>
+        </h1>
+
+        <p class="hero-subtitle">
+          বাংলা ভয়েস প্রযুক্তি ও কৃত্রিম বুদ্ধিমত্তার মাধ্যমে নিরক্ষর ও সাধারণ নাগরিকদের মৌখিক অভিযোগকে 
           তাৎক্ষণিক আইনি ধারা বিশ্লেষণপূর্বক আদালত-উপযোগী পিটিশনে রূপান্তর। <br />
-          <span class="en-tagline">Empowering marginalized citizens through AI-assisted vernacular intake, automated legal fact extraction, and court-ready petition drafting.</span>
+          <span class="en-tagline block mt-1.5 text-slate-300 font-sans text-sm sm:text-base">Empowering marginalized citizens through AI-assisted vernacular intake, automated legal fact extraction, and court-ready petition drafting.</span>
         </p>
       }
 
@@ -138,11 +166,7 @@
             <line x1="12" y1="19" x2="12" y2="22"></line>
             <line x1="8" y1="22" x2="16" y2="22"></line>
           </svg>
-          @if (langService.currentLang() === 'en') {
-            <span>Start Citizen Legal Intake</span>
-          } @else {
-            <span>সরাসরি বাংলায় আইনি সহায়তা নিন <span class="en-btn-tag font-normal opacity-90">· Start Citizen Intake</span></span>
-          }
+          <span>{{ langService.t('সরাসরি বাংলায় আইনি সহায়তা নিন', 'Start Citizen Legal Intake') }}</span>
           <span class="btn-arrow">→</span>
         </a>
 
@@ -151,11 +175,7 @@
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
             <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
-          @if (langService.currentLang() === 'en') {
-            <span>Paralegal & Advocate Desk</span>
-          } @else {
-            <span>প্যারালেগাল ও আইনজীবী ডেক্স <span class="en-btn-tag font-normal text-slate-500">· Paralegal Desk</span></span>
-          }
+          <span>{{ langService.t('প্যারালেগাল ও আইনজীবী ডেক্স', 'Paralegal & Advocate Desk') }}</span>
           <span class="btn-arrow">→</span>
         </a>
       </div>
@@ -164,22 +184,22 @@
       <div class="trust-metrics-strip">
         <div class="metric-item">
           <span class="metric-value">100%</span>
-          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Free Legal Aid' : 'বিনামূল্যে সেবা · Free Legal Aid' }}</span>
+          <span class="metric-label">{{ langService.t('বিনামূল্যে সেবা', 'Free Legal Aid') }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
           <span class="metric-value">6+</span>
-          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Statutory Areas' : 'আইনি বিষয় · Statutory Areas' }}</span>
+          <span class="metric-label">{{ langService.t('আইনি বিষয়', 'Statutory Areas') }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
           <span class="metric-value">1-Click</span>
-          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Formal Court Petition' : 'আদালত PDF · Formal Petition' }}</span>
+          <span class="metric-label">{{ langService.t('আদালত PDF', 'Formal Court Petition') }}</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-item">
           <span class="metric-value">24/7</span>
-          <span class="metric-label">{{ langService.currentLang() === 'en' ? 'Emergency Triage' : 'জরুরি নিরাপত্তা · Safety Triage' }}</span>
+          <span class="metric-label">{{ langService.t('জরুরি নিরাপত্তা', 'Emergency Triage') }}</span>
         </div>
       </div>
     </section>

@@ -21,14 +21,24 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <!-- Interactive Language Switcher (EN | বাংলা) -->
+        <!-- Interactive Language Switcher (Both | বাংলা | English) -->
         <div class="lang-switch-group">
+          <button
+            type="button"
+            class="lang-btn"
+            [class.active]="langService.currentLang() === 'both'"
+            (click)="langService.setLang('both')"
+            title="উভয় ভাষায় দেখুন · View Both Languages"
+          >
+            <span class="lang-flag">🌐</span>
+            <span>উভয় · Both</span>
+          </button>
           <button
             type="button"
             class="lang-btn"
             [class.active]="langService.currentLang() === 'bn'"
             (click)="langService.setLang('bn')"
-            title="বাংলা ভাষায় দেখুন"
+            title="শুধুমাত্র বাংলায় দেখুন"
           >
             <span class="lang-flag">🇧🇩</span>
             <span>বাংলা</span>
@@ -47,7 +57,7 @@
 
         <a routerLink="/" class="back-home-btn" title="মূল পাতায় ফিরে যান | Back to Home">
           <span>←</span>
-          <span>{{ langService.currentLang() === 'en' ? 'Home' : 'মূল পাতা' }}</span>
+          <span>{{ langService.t('মূল পাতা', 'Home') }}</span>
         </a>
       </div>
     </div>

@@ -3,7 +3,9 @@ export interface IncidentDefinition {
   bn: string;
   en: string;
   description: string;
+  descriptionEn?: string;
   rightShort: string;
+  rightShortEn?: string;
   icon?: string;
 }
 
@@ -13,7 +15,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'দেনমোহর / ভরণপোষণ',
     en: 'Dower & Maintenance',
     description: 'দেনমোহর, ভরণপোষণ বা বিবাহ-পরবর্তী পাওনা',
+    descriptionEn: 'Dower claim, child maintenance, post-divorce support',
     rightShort: 'দেনমোহর স্ত্রীর আইনি অধিকার এবং স্ত্রী ও সন্তানের নিয়মিত খোরপোষ পাওয়ার বিধান রয়েছে।',
+    rightShortEn: 'Dower is an absolute legal right of the wife, with statutory rights to child maintenance.',
     icon: 'scale'
   },
   {
@@ -21,7 +25,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'যৌতুক / পারিবারিক সহিংসতা',
     en: 'Dowry & Domestic Violence',
     description: 'যৌতুক দাবি, শারীরিক বা মানসিক নির্যাতন ও সুরক্ষা',
+    descriptionEn: 'Dowry harassment, physical or psychological torture & protection',
     rightShort: 'যৌতুক দাবি আইনত দণ্ডনীয় অপরাধ এবং পারিবারিক সহিংসতায় তাৎক্ষণিক সুরক্ষা আদেশ পাওয়ার অধিকার রয়েছে।',
+    rightShortEn: 'Dowry demands are non-bailable criminal offenses; immediate statutory protection orders apply.',
     icon: 'shield-alert'
   },
   {
@@ -29,7 +35,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'বকেয়া মজুরি / শ্রম',
     en: 'Labour & Unpaid Wages',
     description: 'মজুরি, ওভারটাইম, সার্ভিস বেনিফিট বা বেআইনি বরখাস্ত',
+    descriptionEn: 'Unpaid salary, overtime arrears, unlawful termination & severance',
     rightShort: 'শ্রম আইন অনুযায়ী বকেয়া মজুরি ও ক্ষতিপূরণ আদায়ে শ্রম আদালতে যাওয়ার অধিকার রয়েছে।',
+    rightShortEn: 'Labour Act guarantees right to recover wage arrears and statutory compensation.',
     icon: 'briefcase'
   },
   {
@@ -37,7 +45,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'জমি / সম্পত্তি বিরোধ',
     en: 'Land & Property Dispute',
     description: 'পৈতৃক সম্পত্তি থেকে বঞ্চনা, দখল বা দলিল বিরোধ',
+    descriptionEn: 'Deprivation of inheritance, land grabbing, and title disputes',
     rightShort: 'আইনসম্মত মালিকানা ও দখল বজায় রাখা এবং নারী উত্তরাধিকারীদের সম্পত্তির সুরক্ষার অধিকার রয়েছে।',
+    rightShortEn: 'Protection of legal ownership, peaceful possession and female inheritance shares.',
     icon: 'home'
   },
   {
@@ -45,7 +55,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'নারী ও শিশু সুরক্ষা',
     en: 'Women & Child Protection',
     description: 'সন্তানের অভিভাবকত্ব ও হেফাজত, নিরাপত্তাহীনতা বা সংকট',
+    descriptionEn: 'Child custody, guardianship, child safety and emergency shelter',
     rightShort: 'নারী ও শিশুর সুরক্ষায় কঠোর আইন ও বিনামূল্যে সরকারি লিগ্যাল এইড পাওয়ার অধিকার রয়েছে।',
+    rightShortEn: 'Strict protective statutes and free government legal aid available for women & children.',
     icon: 'users'
   },
   {
@@ -53,7 +65,9 @@ export const INCIDENTS: IncidentDefinition[] = [
     bn: 'অন্য সমস্যা',
     en: 'Other Legal Issues',
     description: 'বিবাহ প্রতারণা, চুক্তিভঙ্গ বা অন্যান্য সাধারণ আইনি বিষয়',
+    descriptionEn: 'Contractual disputes, marital fraud, or general civil grievances',
     rightShort: 'আইনের দৃষ্টিতে যেকোনো বিরোধে সঠিক আইনি পরামর্শ ও বিচার পাওয়ার অধিকার রয়েছে।',
+    rightShortEn: 'Right to legal representation, preliminary legal advice, and fair statutory justice.',
     icon: 'help-circle'
   }
 ];

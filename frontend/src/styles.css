@@ -4508,12 +4508,12 @@ textarea::placeholder {
 }
 
 /* =========================================================================
-   Executive Bilingual Language Switcher Group
+   Executive Bilingual Language Switcher Group (Both | Bangla | English)
    ========================================================================= */
 .lang-switch-group {
   display: inline-flex;
   align-items: center;
-  background: rgba(241, 245, 249, 0.9);
+  background: rgba(241, 245, 249, 0.95);
   border: 1px solid #cbd5e1;
   border-radius: 9999px;
   padding: 3px;
@@ -4532,9 +4532,9 @@ textarea::placeholder {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 12px;
+  padding: 5px 11px;
   border-radius: 9999px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: #475569;
   border: none;
@@ -4560,4 +4560,17 @@ textarea::placeholder {
   font-size: 13px;
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .lang-switch-group {
+    padding: 2px;
+    gap: 1px;
+  }
+  .lang-btn {
+    padding: 4px 7px;
+    font-size: 11px;
+    gap: 3px;
+  }
+}
+
 

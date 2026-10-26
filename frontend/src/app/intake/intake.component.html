@@ -21,14 +21,24 @@
     </div>
 
     <div class="flex items-center gap-3">
-      <!-- Interactive Language Switcher (EN | বাংলা) -->
+      <!-- Interactive Language Switcher (Both | বাংলা | English) -->
       <div class="lang-switch-group">
+        <button
+          type="button"
+          class="lang-btn"
+          [class.active]="langService.currentLang() === 'both'"
+          (click)="langService.setLang('both')"
+          title="উভয় ভাষায় দেখুন · View Both Languages"
+        >
+          <span class="lang-flag">🌐</span>
+          <span>উভয় · Both</span>
+        </button>
         <button
           type="button"
           class="lang-btn"
           [class.active]="langService.currentLang() === 'bn'"
           (click)="langService.setLang('bn')"
-          title="বাংলা ভাষায় রূপান্তর করুন"
+          title="শুধুমাত্র বাংলায় দেখুন"
         >
           <span class="lang-flag">🇧🇩</span>
           <span>বাংলা</span>
@@ -46,10 +56,10 @@
       </div>
 
       <a href="tel:16430" class="helpline-pill hidden sm:flex" title="সরকারি আইনি সহায়তা হটলাইন | Free Legal Helpline">
-        <span>📞 {{ langService.currentLang() === 'en' ? '16430' : '১৬৪৩০' }}</span>
+        <span>📞 {{ langService.currentLang() === 'en' ? '16430' : (langService.currentLang() === 'bn' ? '১৬৪৩০' : '16430 / ১৬৪৩০') }}</span>
       </a>
       <a class="secondary-btn flex items-center gap-1.5 cursor-pointer" routerLink="/" title="মূল পাতায় ফিরে যান | Back to Home">
-        <span>← {{ langService.currentLang() === 'en' ? 'Home' : 'মূল পাতা' }}</span>
+        <span>← {{ langService.t('মূল পাতা', 'Home') }}</span>
       </a>
     </div>
   </header>
@@ -144,13 +154,13 @@
           [class.selected]="selectedCode() === item.code"
           [class.speaking-highlight]="highlightedIncidentCode() === item.code" (click)="selectIncident(item)">
           <div class="incident-card-top">
-            <strong>{{ langService.currentLang() === 'en' ? item.en : item.bn }}</strong>
+            <strong>{{ langService.t(item.bn, item.en) }}</strong>
             <button type="button" class="mini-speaker-btn" (click)="speakSingleIncident(item, $event)"
               title="Listen in Bengali">
               🔊
             </button>
           </div>
-          <span>{{ item.description }}</span>
+          <span>{{ langService.t(item.description, item.descriptionEn || '') }}</span>
         </button>
         }
       </div>

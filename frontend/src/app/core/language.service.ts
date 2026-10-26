@@ -1,47 +1,75 @@
 import { Injectable, signal, computed } from '@angular/core';
 
-export type Language = 'bn' | 'en';
+export type Language = 'both' | 'bn' | 'en';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
-  // Stored language preference or default to 'en' if preferred, or 'bn'
-  private readonly STORAGE_KEY = 'odhikar_portal_lang';
+  private readonly STORAGE_KEY = 'odhikar_portal_lang_mode_v2';
   
+  // Default to 'both' so users immediately see BOTH Bangla and English
   readonly currentLang = signal<Language>(this.getInitialLang());
 
+  readonly isBoth = computed(() => this.currentLang() === 'both');
   readonly isEnglish = computed(() => this.currentLang() === 'en');
   readonly isBangla = computed(() => this.currentLang() === 'bn');
 
-  constructor() {}
+  constructor() {
+    this.updateHtmlLang(this.currentLang());
+  }
 
   private getInitialLang(): Language {
     try {
-      const saved = localStorage.getItem(this.STORAGE_KEY);
-      if (saved === 'en' || saved === 'bn') {
-        return saved;
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const saved = localStorage.getItem(this.STORAGE_KEY) as Language | null;
+        if (saved === 'both' || saved === 'en' || saved === 'bn') {
+          return saved;
+        }
+        // If user explicitly selected English previously, keep it, otherwise default to 'both'
+        const legacy = localStorage.getItem('odhikar_portal_lang');
+        if (legacy === 'en') {
+          return 'en';
+        }
       }
     } catch {}
-    return 'bn'; // Default to Bangla with instant 1-click toggle to English
+    return 'both'; // Default to BOTH so users see both English and Bangla side-by-side
   }
 
   setLang(lang: Language): void {
     this.currentLang.set(lang);
     try {
-      localStorage.setItem(this.STORAGE_KEY, lang);
-      document.documentElement.lang = lang;
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem(this.STORAGE_KEY, lang);
+        localStorage.setItem('odhikar_portal_lang', lang);
+      }
+      this.updateHtmlLang(lang);
     } catch {}
   }
 
-  toggleLang(): void {
-    this.setLang(this.currentLang() === 'bn' ? 'en' : 'bn');
+  private updateHtmlLang(lang: Language): void {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = lang === 'en' ? 'en' : 'bn';
+    }
   }
 
   /**
-   * Helper to return text based on current language
+   * Helper to return text based on current language mode.
+   * - 'en' -> enText
+   * - 'bn' -> bnText
+   * - 'both' -> bnText + delimiter + enText
    */
-  t(bnText: string, enText: string): string {
-    return this.currentLang() === 'en' ? enText : bnText;
+  t(bnText: string, enText: string, delimiter = ' · '): string {
+    const mode = this.currentLang();
+    if (mode === 'en') return enText;
+    if (mode === 'bn') return bnText;
+    // 'both' mode
+    if (!bnText) return enText;
+    if (!enText) return bnText;
+    return `${bnText}${delimiter}${enText}`;
+  }
+
+  tSlash(bnText: string, enText: string): string {
+    return this.t(bnText, enText, ' / ');
   }
 }
